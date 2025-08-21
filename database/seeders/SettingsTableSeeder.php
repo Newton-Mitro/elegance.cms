@@ -24,11 +24,13 @@ class SettingsTableSeeder extends Seeder
             ['key' => 'meta_description', 'value' => 'A powerful CMS built with Laravel'],
 
             // Social links (JSON)
-            ['key' => 'social_links', 'value' => json_encode([
-                'facebook' => 'https://facebook.com/yourpage',
-                'twitter' => 'https://twitter.com/yourpage',
-                'instagram' => 'https://instagram.com/yourpage'
-            ])],
+            ['key' => 'facebook' , 'value' => 'https://facebook.com/yourpage'],
+            ['key' => 'twitter' , 'value' => 'https://twitter.com/yourpage'],
+            ['key' => 'instagram' , 'value' => 'https://instagram.com/yourpage'],
+            ['key' => 'linkedin' , 'value' => 'https://linkedin.com/yourpage'],
+            ['key' => 'youtube' , 'value' => 'https://youtube.com/yourpage'],
+            ['key' => 'github' , 'value' => 'https://github.com/yourpage'],
+            ['key' => 'discord' , 'value' => 'https://discord.com/yourpage'],
 
             // Contact info
             ['key' => 'contact_address', 'value' => '123 Main Street, City, Country'],

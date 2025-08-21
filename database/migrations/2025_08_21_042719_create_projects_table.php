@@ -14,6 +14,8 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->longText('description')->nullable();
             $table->string('category')->nullable();
+            $table->string('source_code_link')->nullable();
+            $table->string('live_site_link')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->json('gallery')->nullable();
