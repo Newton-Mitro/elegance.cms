@@ -17,8 +17,8 @@ class PageFactory extends Factory
         return [
             'title' => $title,
             'slug' => Str::slug($title) . '-' . $this->faker->unique()->numberBetween(100, 999),
-            'meta_title' => $this->faker->optional()->sentence(5),
-            'meta_description' => $this->faker->optional()->paragraph(2),
+            'meta_title' => $this->faker->sentence(5),
+            'meta_description' => $this->faker->paragraph(2),
             'status' => $this->faker->randomElement(['draft', 'published']),
         ];
     }

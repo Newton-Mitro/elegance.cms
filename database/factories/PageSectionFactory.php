@@ -23,11 +23,11 @@ class PageSectionFactory extends Factory
 
         return [
             'page_id' => Page::inRandomOrder()->first()?->id ?? Page::factory(),
-            'heading' => $this->faker->optional()->sentence(4),
+            'heading' => $this->faker->sentence(4),
             'sub_heading' => $this->faker->optional()->sentence(6),
             'button_text' => $this->faker->optional()->word(),
             'button_link' => $this->faker->optional()->url(),
-            'content' => $this->faker->optional()->paragraphs(3, true),
+            'content' => $this->faker->paragraphs(3, true),
             'gallery' => $this->faker->optional()->boolean(70) ? json_encode(
                 collect(range(1, rand(1, 3)))->map(fn() => $this->faker->imageUrl(640, 480))->toArray()
             ) : null,

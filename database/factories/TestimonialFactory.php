@@ -14,8 +14,8 @@ class TestimonialFactory extends Factory
     {
         return [
             'author_name' => $this->faker->name(),
-            'author_designation' => $this->faker->optional()->jobTitle(),
-            'company' => $this->faker->optional()->company(),
+            'author_designation' => $this->faker->jobTitle(),
+            'company' => $this->faker->company(),
             'message' => $this->faker->paragraph(6),
             'photo_media_id' => Media::inRandomOrder()->first()?->id,
             'rating' => $this->faker->numberBetween(3, 5), // ratings between 3–5

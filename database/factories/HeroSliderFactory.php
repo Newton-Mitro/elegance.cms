@@ -13,7 +13,7 @@ class HeroSliderFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->optional()->sentence(4),
+            'title' => $this->faker->sentence(4),
             'subtitle' => $this->faker->optional()->sentence(6),
             'button_text' => $this->faker->optional()->word(),
             'button_link' => $this->faker->optional()->url(),
