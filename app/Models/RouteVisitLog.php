@@ -7,6 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class RouteVisitLog extends Model
 {
-    /** @use HasFactory<\Database\Factories\RouteVisitLogFactory> */
     use HasFactory;
 }

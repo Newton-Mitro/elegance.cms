@@ -2,16 +2,19 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Media;
 
 class MediaSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        //
+        $disk = \Illuminate\Support\Facades\Storage::disk('public');
+
+        if ($disk->exists('uploads')) {
+            $disk->deleteDirectory('uploads');
+        }
+
+        Media::factory(count: 20)->create();
     }
 }

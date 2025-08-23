@@ -2,22 +2,27 @@
 
 namespace Database\Factories;
 
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
- */
 class PostFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Post::class;
+
     public function definition(): array
     {
+        $title = $this->faker->sentence(6);
+
         return [
-            //
+            'user_id' => User::inRandomOrder()->first()?->id,
+            'title' => $title,
+            'slug' => Str::slug($title) . '-' . $this->faker->unique()->numberBetween(100, 999),
+            'content' => $this->faker->paragraphs(5, true),
+            'cover_image' => $this->faker->optional()->imageUrl(800, 400, 'tech', true),
+            'status' => $this->faker->randomElement(['draft', 'published', 'archived']),
+            'published_at' => $this->faker->optional()->dateTimeBetween('-1 year', 'now'),
         ];
     }
 }

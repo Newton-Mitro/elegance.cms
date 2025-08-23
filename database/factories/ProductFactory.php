@@ -2,22 +2,30 @@
 
 namespace Database\Factories;
 
+use App\Models\Media;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
- */
 class ProductFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Product::class;
+
     public function definition(): array
     {
+        $title = $this->faker->unique()->words(3, true);
+
         return [
-            //
+            'title' => ucfirst($title),
+            'slug' => Str::slug($title) . '-' . $this->faker->unique()->numberBetween(100, 999),
+            'description' => $this->faker->paragraph(4),
+            'price' => $this->faker->randomFloat(2, 10, 1000), // price between 10.00 and 1000.00
+            'gallery' => json_encode([
+                $this->faker->imageUrl(600, 600, 'product'),
+                $this->faker->imageUrl(600, 600, 'shopping'),
+            ]),
+            'image_media_id' => Media::inRandomOrder()->first()?->id,
+            'status' => $this->faker->randomElement(['active', 'inactive']),
         ];
     }
 }

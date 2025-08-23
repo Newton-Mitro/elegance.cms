@@ -7,6 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Visitor extends Model
 {
-    /** @use HasFactory<\Database\Factories\VisitorFactory> */
     use HasFactory;
 }

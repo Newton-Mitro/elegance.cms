@@ -2,22 +2,22 @@
 
 namespace Database\Factories;
 
+use App\Models\Award;
+use App\Models\Media;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Award>
- */
 class AwardFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Award::class;
+
     public function definition(): array
     {
         return [
-            //
+            'title' => $this->faker->sentence(3),
+            'organization' => $this->faker->company(),
+            'year' => $this->faker->year(),
+            'description' => $this->faker->optional()->paragraph(4),
+            'image_media_id' => Media::inRandomOrder()->first()?->id,
         ];
     }
 }

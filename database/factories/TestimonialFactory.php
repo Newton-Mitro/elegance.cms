@@ -2,22 +2,23 @@
 
 namespace Database\Factories;
 
+use App\Models\Media;
+use App\Models\Testimonial;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Testimonial>
- */
 class TestimonialFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Testimonial::class;
+
     public function definition(): array
     {
         return [
-            //
+            'author_name' => $this->faker->name(),
+            'author_designation' => $this->faker->optional()->jobTitle(),
+            'company' => $this->faker->optional()->company(),
+            'message' => $this->faker->paragraph(6),
+            'photo_media_id' => Media::inRandomOrder()->first()?->id,
+            'rating' => $this->faker->numberBetween(3, 5), // ratings between 3–5
         ];
     }
 }

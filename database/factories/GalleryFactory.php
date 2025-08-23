@@ -2,22 +2,22 @@
 
 namespace Database\Factories;
 
+use App\Models\Gallery;
+use App\Models\Media;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Gallery>
- */
 class GalleryFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Gallery::class;
+
     public function definition(): array
     {
         return [
-            //
+            'title' => $this->faker->sentence(3),
+            'description' => $this->faker->optional()->paragraph(4),
+            'media_id' => Media::inRandomOrder()->first()?->id,
+            'category' => $this->faker->randomElement(['Photography', 'Illustration', 'Design', 'Other']),
+            'status' => $this->faker->randomElement(['active', 'inactive']),
         ];
     }
 }

@@ -7,23 +7,40 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // Seed default user
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        User::create([
+            'name' => 'Super Admin',
+            'email' => 'super.admin@email.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('password'),
         ]);
 
-        // Seed CMS default settings
         $this->call([
-            SettingsTableSeeder::class,
+            SettingSeeder::class,
+            MediaSeeder::class,
+            PageSeeder::class,
+            PageSectionSeeder::class,
+            CategorySeeder::class,
+            TagSeeder::class,
+            ServiceSeeder::class,
+            ProjectSeeder::class,
+            ProductSeeder::class,
+            TeamSeeder::class,
+            TestimonialSeeder::class,
+            AwardSeeder::class,
+            NoticeSeeder::class,
+            EventSeeder::class,
+            CareerSeeder::class,
+            ContactSeeder::class,
+            ContactMessageSeeder::class,
+            GallerySeeder::class,
+            HeroSliderSeeder::class,
+            PostSeeder::class,
+            PostCategorySeeder::class,
+            PostTagSeeder::class,
+            CommentSeeder::class,
+            LikeSeeder::class,
         ]);
-
-        // Optional: add other seeders here
-        // $this->call(AnotherSeeder::class);
     }
 }

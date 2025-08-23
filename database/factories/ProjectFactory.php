@@ -2,22 +2,34 @@
 
 namespace Database\Factories;
 
+use App\Models\Media;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Project>
- */
 class ProjectFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Project::class;
+
     public function definition(): array
     {
+        $title = $this->faker->unique()->sentence(3);
+
         return [
-            //
+            'title' => $title,
+            'slug' => Str::slug($title) . '-' . $this->faker->unique()->numberBetween(100, 999),
+            'description' => $this->faker->paragraph(5),
+            'category' => $this->faker->randomElement(['Web Development', 'Mobile App', 'Data Science', 'AI/ML', 'Other']),
+            'source_code_link' => $this->faker->url(),
+            'live_site_link' => $this->faker->url(),
+            'start_date' => $this->faker->dateTimeBetween('-2 years', '-6 months')->format('Y-m-d'),
+            'end_date' => optional($this->faker->optional()->dateTimeBetween('-6 months', 'now'))->format('Y-m-d'),
+            'gallery' => json_encode([
+                $this->faker->imageUrl(800, 600, 'project'),
+                $this->faker->imageUrl(800, 600, 'code'),
+            ]),
+            'image_media_id' => Media::inRandomOrder()->first()?->id,
+            'status' => $this->faker->randomElement(['active', 'inactive']),
         ];
     }
 }
