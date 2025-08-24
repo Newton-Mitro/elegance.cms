@@ -2,8 +2,4 @@
 
 namespace App\Domain\Entities;
 
-
-class CareerEntity
-{
-
-}
+class CareerEntity {}

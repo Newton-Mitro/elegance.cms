@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\PageSection;
-use App\Models\Page;
-use App\Models\Media;
+use App\Infrastructure\Models\Media;
+use App\Infrastructure\Models\Page;
+use App\Infrastructure\Models\PageSection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PageSectionFactory extends Factory

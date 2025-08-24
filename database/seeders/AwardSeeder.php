@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Infrastructure\Models\Award;
 use Illuminate\Database\Seeder;
-use App\Models\Award;
 
 class AwardSeeder extends Seeder
 {

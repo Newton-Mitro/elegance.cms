@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\ContactMessage;
+use App\Infrastructure\Models\ContactMessage;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ContactMessageFactory extends Factory

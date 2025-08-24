@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Infrastructure\Models\Page;
 use Illuminate\Database\Seeder;
-use App\Models\Page;
 
 class PageSeeder extends Seeder
 {

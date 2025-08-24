@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Service;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Infrastructure\Models\Service;
+use App\Infrastructure\Models\User;
 
 class ServicePolicy
 {

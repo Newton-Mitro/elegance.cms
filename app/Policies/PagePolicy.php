@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Page;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Infrastructure\Models\Page;
+use App\Infrastructure\Models\User;
 
 class PagePolicy
 {

@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use App\Models\Comment;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Infrastructure\Models\Comment;
+use App\Infrastructure\Models\User;
+
 
 class CommentPolicy
 {

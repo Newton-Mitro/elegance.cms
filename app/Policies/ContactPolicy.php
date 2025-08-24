@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use App\Models\Contact;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Infrastructure\Models\Contact;
+use App\Infrastructure\Models\User;
+
 
 class ContactPolicy
 {

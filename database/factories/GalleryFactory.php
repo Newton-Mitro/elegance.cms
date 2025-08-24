@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Gallery;
-use App\Models\Media;
+use App\Infrastructure\Models\Gallery;
+use App\Infrastructure\Models\Media;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class GalleryFactory extends Factory

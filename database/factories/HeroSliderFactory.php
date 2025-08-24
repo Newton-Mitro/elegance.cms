@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\HeroSlider;
-use App\Models\Media;
+use App\Infrastructure\Models\HeroSlider;
+use App\Infrastructure\Models\Media;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class HeroSliderFactory extends Factory

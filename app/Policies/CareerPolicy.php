@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use App\Models\Career;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Infrastructure\Models\Career;
+use App\Infrastructure\Models\User;
+
 
 class CareerPolicy
 {

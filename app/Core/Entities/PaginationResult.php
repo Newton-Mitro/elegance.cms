@@ -10,6 +10,5 @@ class PaginationResult
         public int $perPage,
         public int $currentPage,
         public int $lastPage
-    ) {
-    }
+    ) {}
 }

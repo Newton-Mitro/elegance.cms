@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Infrastructure\Models\Post;
+use App\Infrastructure\Models\User;
 use Illuminate\Database\Seeder;
-use App\Models\Post;
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class LikeSeeder extends Seeder

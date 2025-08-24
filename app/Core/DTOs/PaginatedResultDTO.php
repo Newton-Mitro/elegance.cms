@@ -5,7 +5,7 @@ namespace App\Core\DTOs;
 class PaginatedResultDTO
 {
     /**
-     * @param array<mixed> $items
+     * @param  array<mixed>  $items
      */
     public function __construct(
         public readonly array $items,
@@ -13,6 +13,5 @@ class PaginatedResultDTO
         public readonly int $perPage,
         public readonly int $currentPage,
         public readonly int $lastPage,
-    ) {
-    }
+    ) {}
 }

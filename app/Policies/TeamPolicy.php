@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Team;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Infrastructure\Models\Team;
+use App\Infrastructure\Models\User;
 
 class TeamPolicy
 {

@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\PostCategory;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Infrastructure\Models\PostCategory;
+use App\Infrastructure\Models\User;
 
 class PostCategoryPolicy
 {

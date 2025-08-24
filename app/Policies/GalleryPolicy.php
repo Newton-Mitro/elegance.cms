@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use App\Models\Gallery;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Infrastructure\Models\Gallery;
+use App\Infrastructure\Models\User;
+
 
 class GalleryPolicy
 {

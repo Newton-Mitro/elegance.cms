@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     public function up(): void
     {
         Schema::create('page_sections', function (Blueprint $table) {
@@ -22,7 +23,7 @@ return new class extends Migration {
                 'json_array_with_img_text',
                 'json_array_with_fa_icon_&_text',
                 'json_array_with_question_&_answer',
-                'custom_html'
+                'custom_html',
             ])->nullable();
             $table->integer('sort_order')->default(0);
             $table->timestamps();

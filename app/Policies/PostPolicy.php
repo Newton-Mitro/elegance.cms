@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Post;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Infrastructure\Models\Post;
+use App\Infrastructure\Models\User;
 
 class PostPolicy
 {

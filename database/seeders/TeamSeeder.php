@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Infrastructure\Models\Team;
 use Illuminate\Database\Seeder;
-use App\Models\Team;
 
 class TeamSeeder extends Seeder
 {

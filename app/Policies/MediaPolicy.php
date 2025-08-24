@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Media;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Infrastructure\Models\Media;
+use App\Infrastructure\Models\User;
 
 class MediaPolicy
 {

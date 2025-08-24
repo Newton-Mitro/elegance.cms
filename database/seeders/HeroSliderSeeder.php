@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Infrastructure\Models\HeroSlider;
 use Illuminate\Database\Seeder;
-use App\Models\HeroSlider;
 
 class HeroSliderSeeder extends Seeder
 {

@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\User;
-use App\Models\Visitor;
-use Illuminate\Auth\Access\Response;
+use App\Infrastructure\Models\User;
+use App\Infrastructure\Models\Visitor;
 
 class VisitorPolicy
 {

@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Setting;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Infrastructure\Models\Setting;
+use App\Infrastructure\Models\User;
 
 class SettingPolicy
 {

@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\PostTag;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Infrastructure\Models\PostTag;
+use App\Infrastructure\Models\User;
 
 class PostTagPolicy
 {

@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use App\Models\ContactMessage;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Infrastructure\Models\ContactMessage;
+use App\Infrastructure\Models\User;
+
 
 class ContactMessagePolicy
 {

@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Award;
-use App\Models\Media;
+use App\Infrastructure\Models\Award;
+use App\Infrastructure\Models\Media;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AwardFactory extends Factory

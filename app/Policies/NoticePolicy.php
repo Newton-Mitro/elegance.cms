@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Notice;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Infrastructure\Models\Notice;
+use App\Infrastructure\Models\User;
 
 class NoticePolicy
 {

@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Media;
-use App\Models\Testimonial;
+use App\Infrastructure\Models\Media;
+use App\Infrastructure\Models\Testimonial;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TestimonialFactory extends Factory

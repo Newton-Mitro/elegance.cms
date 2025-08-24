@@ -2,12 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Media;
-use App\Models\User;
+use App\Infrastructure\Models\Media;
+use App\Infrastructure\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\File;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class MediaFactory extends Factory
 {

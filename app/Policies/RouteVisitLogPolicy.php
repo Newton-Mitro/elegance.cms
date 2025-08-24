@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\RouteVisitLog;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Infrastructure\Models\RouteVisitLog;
+use App\Infrastructure\Models\User;
 
 class RouteVisitLogPolicy
 {

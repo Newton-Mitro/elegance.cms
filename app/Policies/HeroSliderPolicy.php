@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use App\Models\HeroSlider;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Infrastructure\Models\HeroSlider;
+use App\Infrastructure\Models\User;
+
 
 class HeroSliderPolicy
 {

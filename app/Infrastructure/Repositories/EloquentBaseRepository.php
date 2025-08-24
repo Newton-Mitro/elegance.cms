@@ -42,6 +42,7 @@ abstract class EloquentBaseRepository implements RepositoryInterface
     {
         if ($entity instanceof Model) {
             $entity->save();
+
             return $entity;
         }
 

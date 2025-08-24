@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Award;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Infrastructure\Models\Award;
+use App\Infrastructure\Models\User;
 
 class AwardPolicy
 {

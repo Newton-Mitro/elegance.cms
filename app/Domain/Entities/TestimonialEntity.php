@@ -2,8 +2,4 @@
 
 namespace App\Domain\Entities;
 
-
-class TestimonialEntity
-{
-
-}
+class TestimonialEntity {}

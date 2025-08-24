@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Infrastructure\Models\Post;
+use App\Infrastructure\Models\Tag;
 use Illuminate\Database\Seeder;
-use App\Models\Post;
-use App\Models\Tag;
 
 class PostTagSeeder extends Seeder
 {

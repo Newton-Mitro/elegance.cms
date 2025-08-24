@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Infrastructure\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Setting extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'key',
         'value',
@@ -20,8 +21,9 @@ class Setting extends Model
     public static function get($key, $default = null)
     {
         $setting = static::where('key', $key)->first();
-        if (!$setting)
+        if (!$setting) {
             return $default;
+        }
 
         // If value is an array (JSON), return as is; else return string
         return is_array($setting->value) ? $setting->value : $setting->value;

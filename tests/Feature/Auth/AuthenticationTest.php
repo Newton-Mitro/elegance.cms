@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use App\Infrastructure\Models\User;
 
 test('login screen can be rendered', function () {
     $response = $this->get('/login');

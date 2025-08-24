@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Infrastructure\Models\Event;
 use Illuminate\Database\Seeder;
-use App\Models\Event;
 
 class EventSeeder extends Seeder
 {

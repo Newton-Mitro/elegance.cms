@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Infrastructure\Models\Project;
 use Illuminate\Database\Seeder;
-use App\Models\Project;
 
 class ProjectSeeder extends Seeder
 {

@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Media;
-use App\Models\Product;
+use App\Infrastructure\Models\Media;
+use App\Infrastructure\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 

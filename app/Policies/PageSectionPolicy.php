@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\PageSection;
-use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Infrastructure\Models\PageSection;
+use App\Infrastructure\Models\User;
 
 class PageSectionPolicy
 {

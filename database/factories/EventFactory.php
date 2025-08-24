@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Event;
-use App\Models\Media;
+use App\Infrastructure\Models\Event;
+use App\Infrastructure\Models\Media;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
