@@ -6,23 +6,20 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTestimonialRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true; // allow authorized users
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'author_name' => ['required', 'string', 'max:255'],
+            'author_designation' => ['nullable', 'string', 'max:255'],
+            'company' => ['nullable', 'string', 'max:255'],
+            'message' => ['required', 'string'],
+            'photo_media_id' => ['nullable', 'exists:media,id'],
+            'rating' => ['nullable', 'integer', 'between:1,5'],
         ];
     }
 }

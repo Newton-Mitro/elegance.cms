@@ -9,6 +9,6 @@ class PageSeeder extends Seeder
 {
     public function run(): void
     {
-        Page::factory(8)->create(); // generate 8 pages
+        Page::factory(8)->create();
     }
 }

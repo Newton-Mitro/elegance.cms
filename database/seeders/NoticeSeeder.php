@@ -9,6 +9,6 @@ class NoticeSeeder extends Seeder
 {
     public function run(): void
     {
-        Notice::factory(12)->create(); // generate 12 notices
+        Notice::factory(12)->create();
     }
 }

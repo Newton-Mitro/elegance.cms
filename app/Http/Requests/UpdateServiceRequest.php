@@ -6,23 +6,22 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateServiceRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true; // allow authorized users
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'title' => ['sometimes', 'required', 'string', 'max:255'],
+            'slug' => ['sometimes', 'required', 'string', 'max:255', 'unique:services,slug,' . $this->route('service')],
+            'description' => ['nullable', 'string'],
+            'gallery' => ['nullable', 'array'],
+            'gallery.*' => ['string'],
+            'icon_media_id' => ['nullable', 'exists:media,id'],
+            'image_media_id' => ['nullable', 'exists:media,id'],
+            'status' => ['sometimes', 'required', 'in:active,inactive'],
         ];
     }
 }

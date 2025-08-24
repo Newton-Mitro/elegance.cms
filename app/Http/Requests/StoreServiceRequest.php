@@ -6,23 +6,22 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreServiceRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true; // allow authorized users
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required', 'string', 'max:255'],
+            'slug' => ['required', 'string', 'max:255', 'unique:services,slug'],
+            'description' => ['nullable', 'string'],
+            'gallery' => ['nullable', 'array'],
+            'gallery.*' => ['string'], // array of media URLs or paths
+            'icon_media_id' => ['nullable', 'exists:media,id'],
+            'image_media_id' => ['nullable', 'exists:media,id'],
+            'status' => ['required', 'in:active,inactive'],
         ];
     }
 }

@@ -6,23 +6,18 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateMediaRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'file_name' => ['sometimes', 'required', 'string', 'max:255'],
+            'file' => ['sometimes', 'file', 'mimes:jpg,jpeg,png,gif,webp,svg,pdf,doc,docx', 'max:10240'],
+            'alt_text' => ['nullable', 'string', 'max:255'],
+            'uploaded_by' => ['nullable', 'exists:users,id'],
         ];
     }
 }
