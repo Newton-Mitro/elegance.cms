@@ -32,7 +32,7 @@ class PageSectionFactory extends Factory
                 collect(range(1, rand(1, 3)))->map(fn() => $this->faker->imageUrl(640, 480))->toArray()
             ) : null,
             'media_id' => Media::inRandomOrder()->first()?->id ?? null,
-            'section_type' => $this->faker->randomElement($sectionTypes),
+            'content_type' => $this->faker->randomElement($sectionTypes),
             'sort_order' => $this->faker->numberBetween(0, 10),
         ];
     }

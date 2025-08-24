@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PageSection extends Model
 {
     use HasFactory;
-    protected $fillable = ['page_id', 'section_type', 'content', 'sort_order'];
+    protected $fillable = ['page_id', 'content_type', 'content', 'sort_order'];
 
     protected $casts = [
         'content' => 'array',
