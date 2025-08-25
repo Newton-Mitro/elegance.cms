@@ -6,23 +6,23 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRouteVisitLogRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        // Usually true; adjust if only admin can log manually
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'user_id' => 'nullable|exists:users,id',
+            'route' => 'required|string|max:255',
+            'method' => 'required|string|in:GET,POST,PUT,PATCH,DELETE,OPTIONS',
+            'ip_address' => 'nullable|ip',
+            'user_agent' => 'nullable|string|max:1024',
+            'query_params' => 'nullable|json',
+            'request_body' => 'nullable|json',
+            'visited_at' => 'nullable|date',
         ];
     }
 }

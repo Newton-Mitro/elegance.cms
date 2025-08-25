@@ -4,63 +4,57 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCareerRequest;
 use App\Http\Requests\UpdateCareerRequest;
-use App\Models\Career;
+use App\Infrastructure\Models\Career;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class CareerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(): View
     {
-        //
+        $careers = Career::orderByDesc('deadline')->paginate(10);
+        return view('careers.index', compact('careers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('careers.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreCareerRequest $request)
+    public function store(StoreCareerRequest $request): RedirectResponse
     {
-        //
+        $data = $request->validated();
+
+        Career::create($data);
+
+        return redirect()->route('careers.index')
+            ->with('success', 'Career created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Career $career)
+    public function show(Career $career): View
     {
-        //
+        return view('careers.show', compact('career'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Career $career)
+    public function edit(Career $career): View
     {
-        //
+        return view('careers.edit', compact('career'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateCareerRequest $request, Career $career)
+    public function update(UpdateCareerRequest $request, Career $career): RedirectResponse
     {
-        //
+        $data = $request->validated();
+        $career->update($data);
+
+        return redirect()->route('careers.index')
+            ->with('success', 'Career updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Career $career)
+    public function destroy(Career $career): RedirectResponse
     {
-        //
+        $career->delete();
+
+        return redirect()->route('careers.index')
+            ->with('success', 'Career deleted successfully.');
     }
 }

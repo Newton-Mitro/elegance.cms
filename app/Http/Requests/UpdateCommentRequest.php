@@ -6,23 +6,20 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateCommentRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'post_id' => 'sometimes|exists:posts,id',
+            'user_id' => 'sometimes|nullable|exists:users,id',
+            'author_name' => 'sometimes|nullable|string|max:255',
+            'author_email' => 'sometimes|nullable|email|max:255',
+            'content' => 'sometimes|string',
+            'status' => 'sometimes|in:pending,approved,spam',
         ];
     }
 }

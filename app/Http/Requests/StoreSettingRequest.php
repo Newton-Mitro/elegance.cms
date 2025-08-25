@@ -6,23 +6,16 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreSettingRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true; // Set to false if access should be restricted
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'key' => ['required', 'string', 'max:255', 'unique:settings,key'],
+            'value' => ['nullable', 'string'],
         ];
     }
 }

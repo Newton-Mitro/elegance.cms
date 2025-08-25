@@ -6,23 +6,29 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCommentRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        // Return true if authentication/authorization is handled elsewhere
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'post_id' => 'required|exists:posts,id',
+            'user_id' => 'nullable|exists:users,id',
+            'author_name' => 'nullable|string|max:255',
+            'author_email' => 'nullable|email|max:255',
+            'content' => 'required|string',
+            'status' => 'nullable|in:pending,approved,spam',
         ];
+    }
+
+    public function prepareForValidation(): void
+    {
+        // Default status to 'pending' if not provided
+        if (!$this->has('status')) {
+            $this->merge(['status' => 'pending']);
+        }
     }
 }

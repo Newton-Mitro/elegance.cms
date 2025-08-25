@@ -4,63 +4,61 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAwardRequest;
 use App\Http\Requests\UpdateAwardRequest;
-use App\Models\Award;
+use App\Infrastructure\Models\Award;
+use App\Infrastructure\Models\Media;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class AwardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(): View
     {
-        //
+        $awards = Award::with('image')->orderByDesc('year')->paginate(10);
+        return view('awards.index', compact('awards'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(): View
     {
-        //
+        $media = Media::all();
+        return view('awards.create', compact('media'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreAwardRequest $request)
+    public function store(StoreAwardRequest $request): RedirectResponse
     {
-        //
+        $data = $request->validated();
+
+        // If you have image_media_id selected
+        $award = Award::create($data);
+
+        return redirect()->route('awards.index')
+            ->with('success', 'Award created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Award $award)
+    public function show(Award $award): View
     {
-        //
+        return view('awards.show', compact('award'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Award $award)
+    public function edit(Award $award): View
     {
-        //
+        $media = Media::all();
+        return view('awards.edit', compact('award', 'media'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateAwardRequest $request, Award $award)
+    public function update(UpdateAwardRequest $request, Award $award): RedirectResponse
     {
-        //
+        $data = $request->validated();
+        $award->update($data);
+
+        return redirect()->route('awards.index')
+            ->with('success', 'Award updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Award $award)
+    public function destroy(Award $award): RedirectResponse
     {
-        //
+        $award->delete();
+
+        return redirect()->route('awards.index')
+            ->with('success', 'Award deleted successfully.');
     }
 }

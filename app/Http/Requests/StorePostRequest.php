@@ -6,23 +6,21 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StorePostRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true; // Change to false if only certain users can create posts
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'user_id' => ['required', 'exists:users,id'],
+            'title' => ['required', 'string', 'max:255'],
+            'slug' => ['required', 'string', 'max:255', 'unique:posts,slug'],
+            'content' => ['required', 'string'],
+            'cover_image' => ['nullable', 'string'],
+            'status' => ['required', 'in:draft,published,archived'],
+            'published_at' => ['nullable', 'date'],
         ];
     }
 }

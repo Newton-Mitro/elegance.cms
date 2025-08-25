@@ -6,23 +6,26 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTagRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        // Change to true if authentication is handled elsewhere
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255|unique:tags,name',
+            'slug' => 'nullable|string|max:255|unique:tags,slug',
         ];
+    }
+
+    public function prepareForValidation(): void
+    {
+        if (!$this->slug && $this->name) {
+            $this->merge([
+                'slug' => \Str::slug($this->name),
+            ]);
+        }
     }
 }
