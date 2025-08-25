@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react';
 import React from 'react';
-import { Award } from '../../../types/award';
+import { Award } from '../../types/award';
 
 interface PageProps {
     award: Award;

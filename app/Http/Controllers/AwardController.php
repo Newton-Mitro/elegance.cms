@@ -19,7 +19,16 @@ class AwardController extends Controller
     {
         $awards = Award::with('image')->orderByDesc('year')->paginate(10);
 
-        return Inertia::render('admin/award/index', [
+        return Inertia::render('award/index', [
+            'awards' => $awards
+        ]);
+    }
+
+    public function publicIndex(): Response
+    {
+        $awards = Award::with('image')->orderByDesc('year')->paginate(10);
+
+        return Inertia::render('award/public_index', [
             'awards' => $awards
         ]);
     }
@@ -31,7 +40,7 @@ class AwardController extends Controller
     {
         $media = Media::all();
 
-        return Inertia::render('admin/award/create', [
+        return Inertia::render('award/create', [
             'media' => $media
         ]);
     }
@@ -53,10 +62,18 @@ class AwardController extends Controller
      */
     public function show(Award $award): Response
     {
-        return Inertia::render('admin/award/show', [
+        return Inertia::render('award/show', [
             'award' => $award->load('image')
         ]);
     }
+
+    public function publicShow(Award $award): Response
+    {
+        return Inertia::render('award/public_show', [
+            'award' => $award->load('image')
+        ]);
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -65,7 +82,7 @@ class AwardController extends Controller
     {
         $media = Media::all();
 
-        return Inertia::render('admin/award/edit', [
+        return Inertia::render('award/edit', [
             'award' => $award->load('image'),
             'media' => $media
         ]);

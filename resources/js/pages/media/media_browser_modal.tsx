@@ -1,5 +1,5 @@
 import React from 'react';
-import { Media } from '../../../types/media';
+import { Media } from '../../types/media';
 
 interface MediaBrowserModalProps {
     isOpen: boolean;

@@ -41,6 +41,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';
 
+
+Route::get('/awards', [AwardController::class, 'publicIndex'])->name('awards.publicIndex');
+Route::get('/awards/{award}', [AwardController::class, 'publicShow'])->name('awards.publicShow');
+
 Route::prefix('admin')
     ->group(function () {
         // Awards

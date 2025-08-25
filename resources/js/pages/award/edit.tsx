@@ -1,30 +1,32 @@
 import { Inertia } from '@inertiajs/inertia';
 import React, { useState } from 'react';
-import { Media } from '../../../types/media';
-import MediaBrowserModal from '../media/media_browser';
+import { Award } from '../../types/award';
+import { Media } from '../../types/media';
+import MediaBrowserModal from '../media/media_browser_modal';
 
-interface CreateProps {
+interface EditProps {
+    award: Award;
     media: Media[];
 }
 
-const Create: React.FC<CreateProps> = ({ media }) => {
+const Edit: React.FC<EditProps> = ({ award, media }) => {
     const [form, setForm] = useState({
-        year: '',
-        title: '',
-        image_id: null as number | null,
+        year: award.year || '',
+        title: award.title || '',
+        image_id: award.image?.id || null,
     });
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedMedia, setSelectedMedia] = useState<Media | null>(null);
+    const [selectedMedia, setSelectedMedia] = useState<Media | null>(award.image || null);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        Inertia.post('/awards', form);
+        Inertia.put(`/awards/${award.id}`, form);
     };
 
     return (
         <div>
-            <h1 className="mb-4 text-2xl font-bold">Create Award</h1>
+            <h1 className="mb-4 text-2xl font-bold">Edit Award</h1>
 
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
@@ -64,11 +66,10 @@ const Create: React.FC<CreateProps> = ({ media }) => {
                 </div>
 
                 <button type="submit" className="rounded bg-green-600 px-4 py-2 text-white">
-                    Save
+                    Update
                 </button>
             </form>
 
-            {/* Media Modal */}
             <MediaBrowserModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
@@ -82,4 +83,4 @@ const Create: React.FC<CreateProps> = ({ media }) => {
     );
 };
 
-export default Create;
+export default Edit;

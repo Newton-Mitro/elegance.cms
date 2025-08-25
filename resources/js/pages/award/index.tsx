@@ -1,17 +1,21 @@
 import { Inertia } from '@inertiajs/inertia';
 import { Link } from '@inertiajs/react';
 import React from 'react';
-import { Award } from '../../../types/award';
-import { PaginationLink } from '../../../types/pagination_link';
+import { SharedData } from '../../types';
+import { Award } from '../../types/award';
+import { PaginationLink } from '../../types/pagination_link';
 
-interface PageProps {
+interface PageProps extends SharedData {
     awards: {
         data: Award[];
         links: PaginationLink[];
+        // auth: SharedData['auth'];
     };
 }
 
 const Index: React.FC<PageProps> = ({ awards }) => {
+    //  const { auth } = usePage<SharedData>().props;
+
     const deleteAward = (id: number) => {
         if (confirm('Are you sure you want to delete this award?')) {
             Inertia.delete(route('awards.destroy', id));

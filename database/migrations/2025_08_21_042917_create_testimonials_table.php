@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('testimonials', function (Blueprint $table) {
@@ -16,6 +15,7 @@ return new class extends Migration
             $table->longText('message');
             $table->foreignId('photo_media_id')->nullable()->constrained('media')->nullOnDelete();
             $table->tinyInteger('rating')->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
     }
