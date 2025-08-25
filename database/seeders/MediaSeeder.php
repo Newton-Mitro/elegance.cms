@@ -32,7 +32,7 @@ class MediaSeeder extends Seeder
             $fileName = ($index + 1) . '.' . $extension; // 1.jpg, 2.png, etc.
 
             // Copy file into storage/app/public/uploads
-            $disk->putFileAs('uploads', new File($file), $fileName);
+            $path = $disk->putFileAs('uploads', new File($file), $fileName);
 
             // Detect MIME type
             $mimeType = mime_content_type($file);
@@ -40,7 +40,7 @@ class MediaSeeder extends Seeder
             // Create DB record
             Media::create([
                 'file_name' => $fileName,
-                'file_path' => 'storage/uploads/' . $fileName,
+                'file_path' => $path,
                 'file_type' => $mimeType,
                 'alt_text' => pathinfo($file, PATHINFO_FILENAME),
                 'uploaded_by' => User::inRandomOrder()->first()?->id,

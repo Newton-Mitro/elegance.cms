@@ -6,45 +6,74 @@ use App\Http\Requests\StoreAwardRequest;
 use App\Http\Requests\UpdateAwardRequest;
 use App\Infrastructure\Models\Award;
 use App\Infrastructure\Models\Media;
+use Inertia\Inertia;
+use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 
 class AwardController extends Controller
 {
-    public function index(): View
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(): Response
     {
         $awards = Award::with('image')->orderByDesc('year')->paginate(10);
-        return view('awards.index', compact('awards'));
+
+        return Inertia::render('admin/award/index', [
+            'awards' => $awards
+        ]);
     }
 
-    public function create(): View
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create(): Response
     {
         $media = Media::all();
-        return view('awards.create', compact('media'));
+
+        return Inertia::render('admin/award/create', [
+            'media' => $media
+        ]);
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(StoreAwardRequest $request): RedirectResponse
     {
         $data = $request->validated();
-
-        // If you have image_media_id selected
-        $award = Award::create($data);
+        Award::create($data);
 
         return redirect()->route('awards.index')
             ->with('success', 'Award created successfully.');
     }
 
-    public function show(Award $award): View
+    /**
+     * Display the specified resource.
+     */
+    public function show(Award $award): Response
     {
-        return view('awards.show', compact('award'));
+        return Inertia::render('admin/award/show', [
+            'award' => $award->load('image')
+        ]);
     }
 
-    public function edit(Award $award): View
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Award $award): Response
     {
         $media = Media::all();
-        return view('awards.edit', compact('award', 'media'));
+
+        return Inertia::render('admin/award/edit', [
+            'award' => $award->load('image'),
+            'media' => $media
+        ]);
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(UpdateAwardRequest $request, Award $award): RedirectResponse
     {
         $data = $request->validated();
@@ -54,6 +83,9 @@ class AwardController extends Controller
             ->with('success', 'Award updated successfully.');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(Award $award): RedirectResponse
     {
         $award->delete();
