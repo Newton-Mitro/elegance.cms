@@ -20,7 +20,7 @@ class StoreProductRequest extends FormRequest
             'price' => ['nullable', 'numeric', 'min:0'],
             'gallery' => ['nullable', 'array'],
             'gallery.*' => ['string'], // each item is a URL/path
-            'image_media_id' => ['nullable', 'exists:media,id'],
+            'media_id' => ['nullable', 'exists:media,id'],
             'status' => ['required', 'in:active,inactive'],
         ];
     }

@@ -5,26 +5,33 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
 use App\Infrastructure\Models\Service;
+use Inertia\Inertia;
+use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
+use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): Response
     {
-        $services = Service::latest()->paginate(20);
-        return view('services.index', compact('services'));
+        $perPage = $request->input('perPage', 10);
+
+        $services = Service::with(['media', 'icon'])->orderByDesc('year')->paginate(10);
+
+        return Inertia::render('service/index', [
+            'services' => $services,
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create(): Response
     {
-        return view('services.create');
+        return Inertia::render('service/create');
     }
 
     /**
@@ -43,17 +50,21 @@ class ServiceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Service $service): View
+    public function show(Service $service): Response
     {
-        return view('services.show', compact('service'));
+        return Inertia::render('service/show', [
+            'service' => $service,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Service $service): View
+    public function edit(Service $service): Response
     {
-        return view('services.edit', compact('service'));
+        return Inertia::render('service/edit', [
+            'service' => $service,
+        ]);
     }
 
     /**

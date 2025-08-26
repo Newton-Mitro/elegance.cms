@@ -1,4 +1,4 @@
-import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/react';
 import React, { useState } from 'react';
 import { Media } from '../../types/media';
 import MediaBrowserModal from '../media/media_browser_modal';
@@ -19,7 +19,7 @@ const Create: React.FC<CreateProps> = ({ media }) => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        Inertia.post('/awards', form);
+        router.post('/awards', form);
     };
 
     return (

@@ -24,7 +24,7 @@ class UpdateProjectRequest extends FormRequest
             'end_date' => ['nullable', 'date', 'after_or_equal:start_date'],
             'gallery' => ['nullable', 'array'],
             'gallery.*' => ['string'],
-            'image_media_id' => ['nullable', 'exists:media,id'],
+            'media_id' => ['nullable', 'exists:media,id'],
             'status' => ['sometimes', 'required', 'in:active,inactive'],
         ];
     }

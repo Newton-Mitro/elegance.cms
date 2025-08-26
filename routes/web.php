@@ -75,7 +75,7 @@ Route::prefix('admin')
         Route::resource('likes', LikeController::class);
 
         // Media
-        Route::resource('media', MediaController::class);
+        Route::resource('media-files', MediaController::class);
 
         // Notices
         Route::resource('notices', NoticeController::class);

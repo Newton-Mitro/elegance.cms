@@ -20,7 +20,7 @@ class StoreServiceRequest extends FormRequest
             'gallery' => ['nullable', 'array'],
             'gallery.*' => ['string'], // array of media URLs or paths
             'icon_media_id' => ['nullable', 'exists:media,id'],
-            'image_media_id' => ['nullable', 'exists:media,id'],
+            'media_id' => ['nullable', 'exists:media,id'],
             'status' => ['required', 'in:active,inactive'],
         ];
     }

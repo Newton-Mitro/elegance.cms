@@ -8,26 +8,31 @@ use App\Infrastructure\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
+use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 
 class MediaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): Response
     {
-        $mediaItems = Media::latest()->paginate(20);
-        return view('media.index', compact('mediaItems'));
+        $perPage = $request->input('perPage', 20);
+        $mediaItems = Media::latest()->paginate($perPage)->withQueryString();
+
+        return Inertia::render('media/index', [
+            'mediaItems' => $mediaItems,
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create(): Response
     {
-        return view('media.create');
+        return Inertia::render('media/create');
     }
 
     /**
@@ -42,7 +47,7 @@ class MediaController extends Controller
             $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
             $filePath = $file->storeAs('uploads', $fileName, 'public');
 
-            $media = Media::create([
+            Media::create([
                 'file_name' => $fileName,
                 'file_path' => 'storage/' . $filePath,
                 'file_type' => $file->getClientMimeType(),
@@ -59,17 +64,21 @@ class MediaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Media $media): View
+    public function show(Media $media): Response
     {
-        return view('media.show', compact('media'));
+        return Inertia::render('media/show', [
+            'media' => $media,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Media $media): View
+    public function edit(Media $media): Response
     {
-        return view('media.edit', compact('media'));
+        return Inertia::render('media/edit', [
+            'media' => $media,
+        ]);
     }
 
     /**

@@ -10,11 +10,11 @@ class Award extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'date', 'image_media_id'];
+    protected $fillable = ['title', 'description', 'date', 'media_id'];
 
     public function image()
     {
-        return $this->belongsTo(Media::class, 'image_media_id');
+        return $this->belongsTo(Media::class, 'media_id');
     }
 
     protected static function newFactory()

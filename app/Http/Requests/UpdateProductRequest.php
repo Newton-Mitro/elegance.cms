@@ -20,7 +20,7 @@ class UpdateProductRequest extends FormRequest
             'price' => ['nullable', 'numeric', 'min:0'],
             'gallery' => ['nullable', 'array'],
             'gallery.*' => ['string'],
-            'image_media_id' => ['nullable', 'exists:media,id'],
+            'media_id' => ['nullable', 'exists:media,id'],
             'status' => ['sometimes', 'required', 'in:active,inactive'],
         ];
     }

@@ -1,4 +1,4 @@
-import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/react';
 import React, { useState } from 'react';
 import { Award } from '../../types/award';
 import { Media } from '../../types/media';
@@ -21,7 +21,7 @@ const Edit: React.FC<EditProps> = ({ award, media }) => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        Inertia.put(`/awards/${award.id}`, form);
+        router.put(`/awards/${award.id}`, form);
     };
 
     return (

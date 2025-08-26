@@ -24,7 +24,7 @@ class StoreProjectRequest extends FormRequest
             'end_date' => ['nullable', 'date', 'after_or_equal:start_date'],
             'gallery' => ['nullable', 'array'],
             'gallery.*' => ['string'], // array of media paths or URLs
-            'image_media_id' => ['nullable', 'exists:media,id'],
+            'media_id' => ['nullable', 'exists:media,id'],
             'status' => ['required', 'in:active,inactive'],
         ];
     }

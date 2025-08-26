@@ -5,26 +5,37 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePageRequest;
 use App\Http\Requests\UpdatePageRequest;
 use App\Infrastructure\Models\Page;
+use App\Infrastructure\Models\Media;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 
 class PageController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(): Response
     {
-        $pages = Page::latest()->paginate(20); // paginate 20 per page
-        return view('pages.index', compact('pages'));
+        $pages = Page::latest()->paginate(20);
+
+        return Inertia::render('pages/index', [
+            'pages' => $pages
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create(Request $request): Response
     {
-        return view('pages.create');
+        $perPage = $request->input('perPage', 10);
+        $media = Media::latest()->paginate($perPage)->withQueryString();
+
+        return Inertia::render('pages/Create', [
+            'media' => $media
+        ]);
     }
 
     /**
@@ -35,23 +46,32 @@ class PageController extends Controller
         $data = $request->validated();
         Page::create($data);
 
-        return redirect()->route('pages.index')->with('success', 'Page created successfully.');
+        return redirect()->route('pages.index')
+            ->with('success', 'Page created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Page $page): View
+    public function show(Page $page): Response
     {
-        return view('pages.show', compact('page'));
+        return Inertia::render('pages/Show', [
+            'page' => $page->load('image')
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Page $page): View
+    public function edit(Page $page, Request $request): Response
     {
-        return view('pages.edit', compact('page'));
+        $perPage = $request->input('perPage', 10);
+        $media = Media::latest()->paginate($perPage)->withQueryString();
+
+        return Inertia::render('pages/Edit', [
+            'page' => $page->load('image'),
+            'media' => $media
+        ]);
     }
 
     /**
@@ -62,7 +82,8 @@ class PageController extends Controller
         $data = $request->validated();
         $page->update($data);
 
-        return redirect()->route('pages.index')->with('success', 'Page updated successfully.');
+        return redirect()->route('pages.index')
+            ->with('success', 'Page updated successfully.');
     }
 
     /**
@@ -71,6 +92,8 @@ class PageController extends Controller
     public function destroy(Page $page): RedirectResponse
     {
         $page->delete();
-        return redirect()->route('pages.index')->with('success', 'Page deleted successfully.');
+
+        return redirect()->route('pages.index')
+            ->with('success', 'Page deleted successfully.');
     }
 }

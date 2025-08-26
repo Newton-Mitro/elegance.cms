@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->string('organization')->nullable();
             $table->year('year')->nullable();
             $table->longText('description')->nullable();
-            $table->foreignId('image_media_id')->nullable()->constrained('media')->nullOnDelete();
+            $table->foreignId('media_id')->nullable()->constrained('media')->nullOnDelete();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });

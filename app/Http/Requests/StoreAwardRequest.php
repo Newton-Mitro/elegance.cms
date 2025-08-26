@@ -18,7 +18,7 @@ class StoreAwardRequest extends FormRequest
             'organization' => ['nullable', 'string', 'max:255'],
             'year' => ['nullable', 'digits:4', 'integer', 'min:1900', 'max:' . date('Y')],
             'description' => ['nullable', 'string'],
-            'image_media_id' => ['nullable', 'exists:media,id'],
+            'media_id' => ['nullable', 'exists:media,id'],
         ];
     }
 }

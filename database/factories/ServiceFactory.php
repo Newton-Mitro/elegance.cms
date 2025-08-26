@@ -24,7 +24,7 @@ class ServiceFactory extends Factory
                 $this->faker->imageUrl(640, 480, 'technology'),
             ]),
             'icon_media_id' => Media::inRandomOrder()->first()?->id,
-            'image_media_id' => Media::inRandomOrder()->first()?->id,
+            'media_id' => Media::inRandomOrder()->first()?->id,
             'status' => $this->faker->randomElement(['active', 'inactive']),
         ];
     }

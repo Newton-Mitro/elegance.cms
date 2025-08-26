@@ -6,6 +6,7 @@ use App\Http\Requests\StoreAwardRequest;
 use App\Http\Requests\UpdateAwardRequest;
 use App\Infrastructure\Models\Award;
 use App\Infrastructure\Models\Media;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
@@ -36,9 +37,13 @@ class AwardController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): Response
+    public function create(Request $request): Response
     {
-        $media = Media::all();
+        $perPage = $request->input('perPage', 10);
+        $media = Media::query()
+            ->latest()
+            ->paginate($perPage)
+            ->withQueryString();
 
         return Inertia::render('award/create', [
             'media' => $media
@@ -78,9 +83,13 @@ class AwardController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Award $award): Response
+    public function edit(Award $award, Request $request): Response
     {
-        $media = Media::all();
+        $perPage = $request->input('perPage', 10);
+        $media = Media::query()
+            ->latest()
+            ->paginate($perPage)
+            ->withQueryString();
 
         return Inertia::render('award/edit', [
             'award' => $award->load('image'),

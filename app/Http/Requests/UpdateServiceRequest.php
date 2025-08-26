@@ -20,7 +20,7 @@ class UpdateServiceRequest extends FormRequest
             'gallery' => ['nullable', 'array'],
             'gallery.*' => ['string'],
             'icon_media_id' => ['nullable', 'exists:media,id'],
-            'image_media_id' => ['nullable', 'exists:media,id'],
+            'media_id' => ['nullable', 'exists:media,id'],
             'status' => ['sometimes', 'required', 'in:active,inactive'],
         ];
     }

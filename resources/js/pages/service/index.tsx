@@ -4,31 +4,33 @@ import { Eye, Pencil, Trash2 } from 'lucide-react';
 import React from 'react';
 import AppLayout from '../../layouts/app-layout';
 import { SharedData } from '../../types';
-import { Award } from '../../types/award';
 import { PaginationLink } from '../../types/pagination_link';
+import { Service } from '../../types/service';
 
 interface PageProps extends SharedData {
-    awards: {
-        data: Award[];
+    services: {
+        data: Service[];
         links: PaginationLink[];
     };
 }
 
-const Index: React.FC<PageProps> = ({ awards }) => {
-    const deleteAward = (id: number) => {
-        if (confirm('Are you sure you want to delete this award?')) {
-            router.delete(route('awards.destroy', id));
+const Index: React.FC<PageProps> = ({ services }) => {
+    const deleteService = (id: number) => {
+        if (confirm('Are you sure you want to delete this service?')) {
+            router.delete(route('services.destroy', id));
         }
     };
 
+    console.log(services);
+
     return (
         <AppLayout>
-            <Head title="Awards" />
+            <Head title="Services" />
             <div className="p-6">
                 <div className="mb-4 flex justify-between">
-                    <h1 className="text-xl font-bold">Awards</h1>
-                    <Link href={route('awards.create')} className="btn btn-primary">
-                        Create Award
+                    <h1 className="text-xl font-bold">Services</h1>
+                    <Link href={route('services.create')} className="btn btn-primary">
+                        Create Service
                     </Link>
                 </div>
 
@@ -37,30 +39,41 @@ const Index: React.FC<PageProps> = ({ awards }) => {
                         <thead className="sticky top-0 hidden bg-gray-900 shadow-sm md:table-header-group">
                             <tr>
                                 <th className="border p-2 text-left">Title</th>
-                                <th className="border p-2 text-left">Year</th>
+                                <th className="border p-2 text-left">Slug</th>
+                                <th className="border p-2 text-left">Status</th>
                                 <th className="border p-2 text-left">Image</th>
                                 <th className="border p-2 text-left">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="flex flex-col md:table-row-group">
-                            {awards.data.map((award) => (
-                                <tr key={award.id} className="flex flex-col border-b even:bg-gray-900 md:table-row md:flex-row">
+                            {services.data.map((service) => (
+                                <tr key={service.id} className="flex flex-col border-b even:bg-gray-900 md:table-row md:flex-row">
                                     {/* Title */}
                                     <td className="border px-2 py-1">
                                         <label className="font-semibold md:hidden">Title</label>
-                                        <p>{award.title}</p>
+                                        <p>{service.title}</p>
                                     </td>
 
-                                    {/* Year */}
+                                    {/* Slug */}
                                     <td className="border px-2 py-1">
-                                        <label className="font-semibold md:hidden">Year</label>
-                                        <p>{award.year}</p>
+                                        <label className="font-semibold md:hidden">Slug</label>
+                                        <p>{service.slug}</p>
+                                    </td>
+
+                                    {/* Status */}
+                                    <td className="border px-2 py-1">
+                                        <label className="font-semibold md:hidden">Status</label>
+                                        <span
+                                            className={`rounded px-2 py-0.5 text-white ${service.status === 'active' ? 'bg-green-600' : 'bg-red-600'}`}
+                                        >
+                                            {service.status}
+                                        </span>
                                     </td>
 
                                     {/* Image */}
                                     <td className="border px-2 py-1">
                                         <label className="font-semibold md:hidden">Image</label>
-                                        {award.image ? <img src={award.image.url} alt={award.title} className="h-10" /> : <span>-</span>}
+                                        {service.media ? <img src={service.media.url} alt={service.title} className="h-10" /> : <span>-</span>}
                                     </td>
 
                                     {/* Actions */}
@@ -70,7 +83,7 @@ const Index: React.FC<PageProps> = ({ awards }) => {
                                             <TooltipProvider>
                                                 <Tooltip>
                                                     <TooltipTrigger asChild>
-                                                        <Link href={route('awards.show', award.id)} className="text-blue-500">
+                                                        <Link href={route('services.show', service.id)} className="text-blue-500">
                                                             <Eye className="h-5 w-5" />
                                                         </Link>
                                                     </TooltipTrigger>
@@ -79,7 +92,7 @@ const Index: React.FC<PageProps> = ({ awards }) => {
 
                                                 <Tooltip>
                                                     <TooltipTrigger asChild>
-                                                        <Link href={route('awards.edit', award.id)} className="text-green-500">
+                                                        <Link href={route('services.edit', service.id)} className="text-green-500">
                                                             <Pencil className="h-5 w-5" />
                                                         </Link>
                                                     </TooltipTrigger>
@@ -88,7 +101,7 @@ const Index: React.FC<PageProps> = ({ awards }) => {
 
                                                 <Tooltip>
                                                     <TooltipTrigger asChild>
-                                                        <button onClick={() => deleteAward(award.id)} className="text-red-500">
+                                                        <button onClick={() => deleteService(service.id)} className="text-red-500">
                                                             <Trash2 className="h-5 w-5" />
                                                         </button>
                                                     </TooltipTrigger>
@@ -105,9 +118,9 @@ const Index: React.FC<PageProps> = ({ awards }) => {
 
                 {/* Pagination */}
                 <div className="mt-4 flex flex-col items-center justify-between gap-2 md:flex-row">
-                    <span className="text-sm text-gray-600">Showing {awards.data.length} results</span>
+                    <span className="text-sm text-gray-600">Showing {services.data.length} results</span>
                     <div className="flex gap-1">
-                        {awards.links.map((link, i) => (
+                        {services.links.map((link, i) => (
                             <Link
                                 key={i}
                                 href={link.url || '#'}
