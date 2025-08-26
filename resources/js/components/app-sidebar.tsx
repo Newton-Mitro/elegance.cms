@@ -47,6 +47,11 @@ const mainNavItems: NavItem[] = [
         icon: ImagesIcon,
     },
     {
+        title: 'Service Categories',
+        href: '/admin/service_categories',
+        icon: HandPlatterIcon,
+    },
+    {
         title: 'Services',
         href: '/admin/services',
         icon: HandPlatterIcon,
@@ -57,9 +62,44 @@ const mainNavItems: NavItem[] = [
         icon: IdCard,
     },
     {
+        title: 'Teachers',
+        href: '/admin/teachers',
+        icon: IdCard,
+    },
+    {
+        title: 'Faculty Members',
+        href: '/admin/faculty_members',
+        icon: IdCard,
+    },
+    {
+        title: 'Students',
+        href: '/admin/students',
+        icon: IdCard,
+    },
+    {
+        title: 'Partners',
+        href: '/admin/partners',
+        icon: IdCard,
+    },
+    {
+        title: 'FAQs',
+        href: '/admin/faqs',
+        icon: IdCard,
+    },
+    {
+        title: 'Project Categories',
+        href: '/admin/project_categories',
+        icon: HandPlatterIcon,
+    },
+    {
         title: 'Products',
         href: '/admin/products',
         icon: StoreIcon,
+    },
+    {
+        title: 'Project Categories',
+        href: '/admin/project_categories',
+        icon: HandPlatterIcon,
     },
     {
         title: 'Projects',
@@ -67,9 +107,19 @@ const mainNavItems: NavItem[] = [
         icon: MedalIcon,
     },
     {
+        title: 'Notice Categories',
+        href: '/admin/notice_categories',
+        icon: HandPlatterIcon,
+    },
+    {
         title: 'Notices',
         href: '/admin/notices',
         icon: BellDotIcon,
+    },
+    {
+        title: 'Event Categories',
+        href: '/admin/event_categories',
+        icon: HandPlatterIcon,
     },
     {
         title: 'Events',
