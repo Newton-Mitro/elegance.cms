@@ -22,6 +22,11 @@ class PageSection extends Model
         return $this->belongsTo(Page::class);
     }
 
+    public function media()
+    {
+        return $this->belongsTo(Media::class, 'media_id');
+    }
+
     protected static function newFactory()
     {
         return PageSectionFactory::new();

@@ -97,7 +97,7 @@ const mainNavItems: NavItem[] = [
         icon: UsersRoundIcon,
     },
     {
-        title: 'Settings',
+        title: 'Site Settings',
         href: '/admin/settings',
         icon: SettingsIcon,
     },

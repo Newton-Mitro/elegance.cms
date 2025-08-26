@@ -1,20 +1,12 @@
 import { router } from '@inertiajs/react';
 import React from 'react';
 import { Media } from '../../types/media';
-
-interface PaginatedMedia {
-    data: Media[];
-    links: {
-        url: string | null;
-        label: string;
-        active: boolean;
-    }[];
-}
+import { PaginatedData } from '../../types/paginated_meta';
 
 interface MediaBrowserModalProps {
     isOpen: boolean;
     onClose: () => void;
-    media: PaginatedMedia;
+    media: PaginatedData<Media>;
     onSelect: (media: Media) => void;
 }
 

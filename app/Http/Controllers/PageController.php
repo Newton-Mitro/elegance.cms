@@ -6,6 +6,7 @@ use App\Http\Requests\StorePageRequest;
 use App\Http\Requests\UpdatePageRequest;
 use App\Infrastructure\Models\Page;
 use App\Infrastructure\Models\Media;
+use App\Infrastructure\Models\PageSection;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -67,9 +68,14 @@ class PageController extends Controller
     {
         $perPage = $request->input('perPage', 10);
         $media = Media::latest()->paginate($perPage)->withQueryString();
+        $sections = PageSection::with('media')
+            ->where('page_id', $page->id)
+            ->orderBy('sort_order', 'asc')
+            ->get();
 
-        return Inertia::render('pages/Edit', [
-            'page' => $page->load('image'),
+        return Inertia::render('pages/edit', [
+            'page' => $page,
+            'sections' => $sections,
             'media' => $media
         ]);
     }

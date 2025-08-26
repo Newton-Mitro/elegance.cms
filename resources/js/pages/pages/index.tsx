@@ -1,6 +1,6 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Head, Link, router } from '@inertiajs/react';
-import { Eye, Pencil, Trash2 } from 'lucide-react';
+import { Head, Link } from '@inertiajs/react';
+import { Eye, Pencil } from 'lucide-react';
 import React from 'react';
 import AppLayout from '../../layouts/app-layout';
 import { SharedData } from '../../types';
@@ -15,21 +15,12 @@ interface PageProps extends SharedData {
 }
 
 const Index: React.FC<PageProps> = ({ pages }) => {
-    const deletePage = (id: number) => {
-        if (confirm('Are you sure you want to delete this page?')) {
-            router.delete(route('pages.destroy', id));
-        }
-    };
-
     return (
         <AppLayout>
             <Head title="Pages" />
             <div className="p-6">
                 <div className="mb-4 flex justify-between">
                     <h1 className="text-xl font-bold">Pages</h1>
-                    <Link href={route('pages.create')} className="btn btn-primary">
-                        Create Page
-                    </Link>
                 </div>
 
                 <div className="h-[calc(100vh-250px)] overflow-auto rounded border">
@@ -84,15 +75,6 @@ const Index: React.FC<PageProps> = ({ pages }) => {
                                                         </Link>
                                                     </TooltipTrigger>
                                                     <TooltipContent>Edit</TooltipContent>
-                                                </Tooltip>
-
-                                                <Tooltip>
-                                                    <TooltipTrigger asChild>
-                                                        <button onClick={() => deletePage(page.id)} className="text-red-500">
-                                                            <Trash2 className="h-5 w-5" />
-                                                        </button>
-                                                    </TooltipTrigger>
-                                                    <TooltipContent>Delete</TooltipContent>
                                                 </Tooltip>
                                             </TooltipProvider>
                                         </div>

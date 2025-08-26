@@ -10,12 +10,15 @@ class Page extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'slug', 'meta_title', 'meta_description', 'status'];
+    protected $fillable = ['title', 'slug', 'meta_title', 'meta_description', 'status', 'media_id'];
 
     public function sections()
     {
         return $this->hasMany(PageSection::class);
     }
+
+
+
 
     protected static function newFactory()
     {

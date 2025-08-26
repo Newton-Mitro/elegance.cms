@@ -138,4 +138,9 @@
     body {
         @apply bg-background text-foreground;
     }
+
+    .ck.ck-editor__main > .ck-editor__editable {
+        background-color: oklch(0.269 0 0) !important;
+        color: inherit;
+    }
 }
