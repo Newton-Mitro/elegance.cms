@@ -56,8 +56,14 @@ class PageController extends Controller
      */
     public function show(Page $page): Response
     {
+        $sections = PageSection::with('media')
+            ->where('page_id', $page->id)
+            ->orderBy('sort_order', 'asc')
+            ->get();
+
         return Inertia::render('pages/show', [
-            'page' => $page
+            'page' => $page,
+            'sections' => $sections,
         ]);
     }
 
