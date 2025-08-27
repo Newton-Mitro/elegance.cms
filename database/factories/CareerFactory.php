@@ -22,7 +22,7 @@ class CareerFactory extends Factory
             'location' => $this->faker->city(),
             'salary_range' => '$' . $this->faker->numberBetween(30000, 80000) . ' - $' . $this->faker->numberBetween(90000, 150000),
             'deadline' => optional($this->faker->optional()->dateTimeBetween('now', '+6 months'))->format('Y-m-d'),
-            'status' => $this->faker->randomElement(['active', 'inactive']),
+            'status' => $this->faker->randomElement(['Active', 'Inactive']),
         ];
     }
 }

@@ -17,7 +17,7 @@ class UpdateTeamRequest extends FormRequest
             'name' => ['sometimes', 'required', 'string', 'max:255'],
             'designation' => ['sometimes', 'required', 'string', 'max:255'],
             'bio' => ['nullable', 'string'],
-            'photo_media_id' => ['nullable', 'exists:media,id'],
+            'media_id' => ['nullable', 'exists:media,id'],
             'social_links' => ['nullable', 'array'],
             'social_links.*' => ['string'],
         ];

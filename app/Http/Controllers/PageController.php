@@ -56,14 +56,11 @@ class PageController extends Controller
      */
     public function show(Page $page): Response
     {
-        return Inertia::render('pages/Show', [
-            'page' => $page->load('image')
+        return Inertia::render('pages/show', [
+            'page' => $page
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Page $page, Request $request): Response
     {
         $perPage = $request->input('perPage', 10);

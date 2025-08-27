@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->longText('content')->nullable();
             $table->date('publish_date');
             $table->date('expiry_date')->nullable();
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->timestamps();
         });
     }

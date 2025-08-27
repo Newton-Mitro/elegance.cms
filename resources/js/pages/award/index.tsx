@@ -1,6 +1,6 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Head, Link, router } from '@inertiajs/react';
-import { Eye, Pencil, Trash2 } from 'lucide-react';
+import { Eye, PaperclipIcon, Pencil, Trash2 } from 'lucide-react';
 import React from 'react';
 import AppLayout from '../../layouts/app-layout';
 import { SharedData } from '../../types';
@@ -57,10 +57,20 @@ const Index: React.FC<PageProps> = ({ awards }) => {
                                         <p>{award.year}</p>
                                     </td>
 
-                                    {/* Image */}
+                                    {/* Preview */}
                                     <td className="border px-2 py-1">
-                                        <label className="font-semibold md:hidden">Image</label>
-                                        {award.image ? <img src={award.image.url} alt={award.title} className="h-10" /> : <span>-</span>}
+                                        <label className="font-semibold md:hidden">Preview</label>
+                                        {award.image && award.image.file_type.startsWith('image/') ? (
+                                            <img
+                                                src={award.image.url} // or media.url if you have a full URL
+                                                alt={award.image.alt_text || award.image.file_name}
+                                                className="h-10"
+                                            />
+                                        ) : (
+                                            <div className="flex items-center space-x-1">
+                                                <PaperclipIcon />
+                                            </div>
+                                        )}
                                     </td>
 
                                     {/* Actions */}

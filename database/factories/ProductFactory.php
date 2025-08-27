@@ -25,7 +25,7 @@ class ProductFactory extends Factory
                 $this->faker->imageUrl(600, 600, 'shopping'),
             ]),
             'media_id' => Media::inRandomOrder()->first()?->id,
-            'status' => $this->faker->randomElement(['active', 'inactive']),
+            'status' => $this->faker->randomElement(['Active', 'Inactive']),
         ];
     }
 }

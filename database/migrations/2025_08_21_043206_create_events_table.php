@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('events', function (Blueprint $table) {
@@ -17,7 +16,7 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->foreignId('banner_media_id')->nullable()->constrained('media')->nullOnDelete();
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->timestamps();
         });
     }

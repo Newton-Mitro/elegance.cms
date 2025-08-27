@@ -17,7 +17,7 @@ class StoreTeamRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'designation' => ['required', 'string', 'max:255'],
             'bio' => ['nullable', 'string'],
-            'photo_media_id' => ['nullable', 'exists:media,id'],
+            'media_id' => ['nullable', 'exists:media,id'],
             'social_links' => ['nullable', 'array'],
             'social_links.*' => ['string'], // each social link as string
         ];

@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('hero_sliders', function (Blueprint $table) {
@@ -16,7 +15,7 @@ return new class extends Migration
             $table->string('button_link')->nullable();
             $table->foreignId('media_id')->constrained('media')->cascadeOnDelete();
             $table->integer('sort_order')->default(0);
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->timestamps();
         });
     }

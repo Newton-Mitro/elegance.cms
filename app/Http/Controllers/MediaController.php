@@ -64,20 +64,20 @@ class MediaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Media $media): Response
+    public function show(Media $media_file): Response
     {
         return Inertia::render('media/show', [
-            'media' => $media,
+            'media' => $media_file,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Media $media): Response
+    public function edit(Media $media_file): Response
     {
         return Inertia::render('media/edit', [
-            'media' => $media,
+            'media' => $media_file,
         ]);
     }
 

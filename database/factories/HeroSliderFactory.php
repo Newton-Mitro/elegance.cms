@@ -19,7 +19,7 @@ class HeroSliderFactory extends Factory
             'button_link' => $this->faker->optional()->url(),
             'media_id' => Media::inRandomOrder()->first()?->id,
             'sort_order' => $this->faker->numberBetween(0, 10),
-            'status' => $this->faker->randomElement(['active', 'inactive']),
+            'status' => $this->faker->randomElement(['Active', 'Inactive']),
         ];
     }
 }

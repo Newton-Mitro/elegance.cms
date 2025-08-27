@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->json('gallery')->nullable();
             $table->foreignId('icon_media_id')->nullable()->constrained('media')->nullOnDelete();
             $table->foreignId('media_id')->nullable()->constrained('media')->nullOnDelete();
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->timestamps();
         });
     }

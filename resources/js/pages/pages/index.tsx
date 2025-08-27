@@ -3,7 +3,7 @@ import { Head, Link } from '@inertiajs/react';
 import { Eye, Pencil } from 'lucide-react';
 import React from 'react';
 import AppLayout from '../../layouts/app-layout';
-import { SharedData } from '../../types';
+import { BreadcrumbItem, SharedData } from '../../types';
 import { Page } from '../../types/page';
 import { PaginationLink } from '../../types/pagination_link';
 
@@ -15,8 +15,13 @@ interface PageProps extends SharedData {
 }
 
 const Index: React.FC<PageProps> = ({ pages }) => {
+    const breadcrumbs: BreadcrumbItem[] = [
+        { title: 'Dashboard', href: '/dashboard' },
+        { title: 'Pages', href: '/admin/pages' },
+    ];
+
     return (
-        <AppLayout>
+        <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Pages" />
             <div className="p-6">
                 <div className="mb-4 flex justify-between">

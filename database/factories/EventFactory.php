@@ -26,7 +26,7 @@ class EventFactory extends Factory
             'start_date' => $startDate->format('Y-m-d'),
             'end_date' => $endDate?->format('Y-m-d'),
             'banner_media_id' => Media::inRandomOrder()->first()?->id,
-            'status' => $this->faker->randomElement(['active', 'inactive']),
+            'status' => $this->faker->randomElement(['Active', 'Inactive']),
         ];
     }
 }

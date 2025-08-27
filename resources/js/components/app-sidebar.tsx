@@ -5,23 +5,30 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, Sid
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import {
-    AtSignIcon,
     BadgeCheckIcon,
     BellDotIcon,
+    BriefcaseIcon,
+    CalendarCheck2Icon,
     CalendarClockIcon,
     HandPlatterIcon,
     HandshakeIcon,
-    IdCard,
+    ImagePlusIcon,
     ImagesIcon,
     LayoutGrid,
     MedalIcon,
     NotebookIcon,
+    PickaxeIcon,
+    RssIcon,
+    School2Icon,
     SettingsIcon,
+    ShieldAlertIcon,
+    SplitIcon,
     StoreIcon,
     TrophyIcon,
     UploadIcon,
     UserRoundCheckIcon,
     UsersRoundIcon,
+    ViewIcon,
 } from 'lucide-react';
 import AppLogo from './app-logo';
 
@@ -47,9 +54,19 @@ const mainNavItems: NavItem[] = [
         icon: ImagesIcon,
     },
     {
+        title: 'Team Categories',
+        href: '/admin/team_categories',
+        icon: SplitIcon,
+    },
+    {
+        title: 'Teams',
+        href: '/admin/teams',
+        icon: BriefcaseIcon,
+    },
+    {
         title: 'Service Categories',
         href: '/admin/service_categories',
-        icon: HandPlatterIcon,
+        icon: SplitIcon,
     },
     {
         title: 'Services',
@@ -57,39 +74,14 @@ const mainNavItems: NavItem[] = [
         icon: HandPlatterIcon,
     },
     {
-        title: 'Teams',
-        href: '/admin/teams',
-        icon: IdCard,
+        title: 'Service Appointments',
+        href: '/admin/appointments',
+        icon: CalendarCheck2Icon,
     },
     {
-        title: 'Teachers',
-        href: '/admin/teachers',
-        icon: IdCard,
-    },
-    {
-        title: 'Faculty Members',
-        href: '/admin/faculty_members',
-        icon: IdCard,
-    },
-    {
-        title: 'Students',
-        href: '/admin/students',
-        icon: IdCard,
-    },
-    {
-        title: 'Partners',
-        href: '/admin/partners',
-        icon: IdCard,
-    },
-    {
-        title: 'FAQs',
-        href: '/admin/faqs',
-        icon: IdCard,
-    },
-    {
-        title: 'Project Categories',
-        href: '/admin/project_categories',
-        icon: HandPlatterIcon,
+        title: 'Product Categories',
+        href: '/admin/product_categories',
+        icon: SplitIcon,
     },
     {
         title: 'Products',
@@ -99,7 +91,7 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Project Categories',
         href: '/admin/project_categories',
-        icon: HandPlatterIcon,
+        icon: SplitIcon,
     },
     {
         title: 'Projects',
@@ -107,19 +99,9 @@ const mainNavItems: NavItem[] = [
         icon: MedalIcon,
     },
     {
-        title: 'Notice Categories',
-        href: '/admin/notice_categories',
-        icon: HandPlatterIcon,
-    },
-    {
         title: 'Notices',
         href: '/admin/notices',
         icon: BellDotIcon,
-    },
-    {
-        title: 'Event Categories',
-        href: '/admin/event_categories',
-        icon: HandPlatterIcon,
     },
     {
         title: 'Events',
@@ -127,19 +109,59 @@ const mainNavItems: NavItem[] = [
         icon: CalendarClockIcon,
     },
     {
+        title: 'Galleries',
+        href: '/admin/galleries',
+        icon: ImagePlusIcon,
+    },
+    {
+        title: 'Class Levels',
+        href: '/admin/class_levels',
+        icon: SplitIcon,
+    },
+    {
+        title: 'Students',
+        href: '/admin/students',
+        icon: School2Icon,
+    },
+    {
+        title: 'Partners',
+        href: '/admin/partners',
+        icon: HandshakeIcon,
+    },
+    {
+        title: 'FAQs',
+        href: '/admin/faqs',
+        icon: ShieldAlertIcon,
+    },
+    {
         title: 'Awards',
         href: '/admin/awards',
         icon: TrophyIcon,
     },
     {
-        title: 'Careers',
-        href: '/admin/careers',
-        icon: HandshakeIcon,
+        title: 'Job Circulars',
+        href: '/admin/job_circulars',
+        icon: PickaxeIcon,
+    },
+    {
+        title: 'Job Applications',
+        href: '/admin/job_applications',
+        icon: ViewIcon,
     },
     {
         title: 'Testimonials',
         href: '/admin/testimonials',
         icon: BadgeCheckIcon,
+    },
+    {
+        title: 'Post Categories',
+        href: '/admin/post_categories',
+        icon: SplitIcon,
+    },
+    {
+        title: 'Blogs',
+        href: '/admin/posts',
+        icon: RssIcon,
     },
     {
         title: 'Users',
@@ -158,11 +180,6 @@ const footerNavItems: NavItem[] = [
         title: 'Developer Profile',
         href: 'https://www.linkedin.com/in/newton-mitro-24229311/',
         icon: UserRoundCheckIcon,
-    },
-    {
-        title: 'Email Me',
-        href: 'mailto:newtonmitro@gmail.com',
-        icon: AtSignIcon,
     },
 ];
 

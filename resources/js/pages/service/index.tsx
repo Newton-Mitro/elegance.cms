@@ -1,6 +1,6 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Head, Link, router } from '@inertiajs/react';
-import { Eye, Pencil, Trash2 } from 'lucide-react';
+import { Eye, PaperclipIcon, Pencil, Trash2 } from 'lucide-react';
 import React from 'react';
 import AppLayout from '../../layouts/app-layout';
 import { SharedData } from '../../types';
@@ -64,16 +64,26 @@ const Index: React.FC<PageProps> = ({ services }) => {
                                     <td className="border px-2 py-1">
                                         <label className="font-semibold md:hidden">Status</label>
                                         <span
-                                            className={`rounded px-2 py-0.5 text-white ${service.status === 'active' ? 'bg-green-600' : 'bg-red-600'}`}
+                                            className={`rounded px-2 py-0.5 text-white ${service.status === 'Active' ? 'bg-green-600' : 'bg-red-600'}`}
                                         >
                                             {service.status}
                                         </span>
                                     </td>
 
-                                    {/* Image */}
+                                    {/* Preview */}
                                     <td className="border px-2 py-1">
-                                        <label className="font-semibold md:hidden">Image</label>
-                                        {service.media ? <img src={service.media.url} alt={service.title} className="h-10" /> : <span>-</span>}
+                                        <label className="font-semibold md:hidden">Preview</label>
+                                        {service.media && service.media.file_type.startsWith('image/') ? (
+                                            <img
+                                                src={service.media.url} // or media.url if you have a full URL
+                                                alt={service.media.alt_text || service.media.file_name}
+                                                className="h-10"
+                                            />
+                                        ) : (
+                                            <div className="flex items-center space-x-1">
+                                                <PaperclipIcon />
+                                            </div>
+                                        )}
                                     </td>
 
                                     {/* Actions */}

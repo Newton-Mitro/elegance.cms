@@ -12,9 +12,27 @@ return new class extends Migration {
             $table->string('name');
             $table->string('designation');
             $table->longText('bio')->nullable();
-            $table->foreignId('photo_media_id')->nullable()->constrained('media')->nullOnDelete();
-            $table->json('social_links')->nullable();
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->longText('message')->nullable();
+            $table->string('department')->nullable();
+            $table->foreignId('media_id')->nullable()->constrained('media')->nullOnDelete();
+            $table->string('facebook_links')->nullable();
+            $table->string('twitter_links')->nullable();
+            $table->string('linkedin_links')->nullable();
+            $table->string('instagram_links')->nullable();
+            $table->string('youtube_links')->nullable();
+            $table->string('pinterest_links')->nullable();
+            $table->string('tiktok_links')->nullable();
+            $table->string('snapchat_links')->nullable();
+            $table->string('whatsapp_links')->nullable();
+            $table->string('telegram_links')->nullable();
+            $table->string('github_links')->nullable();
+            $table->string('discord_links')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+
+            // $table->enum('category', ['Leader', 'Teacher', 'Doctor', 'Dentist', 'Nurse', 'Beautician', 'Hairstylist', 'Chef', 'Other Staff'])->default('Leader');
+            $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->decimal('price', 10, 2)->nullable();
             $table->json('gallery')->nullable();
             $table->foreignId('media_id')->nullable()->constrained('media')->nullOnDelete();
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->timestamps();
         });
     }

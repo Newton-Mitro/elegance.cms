@@ -17,7 +17,7 @@ class GalleryFactory extends Factory
             'description' => $this->faker->optional()->paragraph(4),
             'media_id' => Media::inRandomOrder()->first()?->id,
             'category' => $this->faker->randomElement(['Photography', 'Illustration', 'Design', 'Other']),
-            'status' => $this->faker->randomElement(['active', 'inactive']),
+            'status' => $this->faker->randomElement(['Active', 'Inactive']),
         ];
     }
 }

@@ -29,7 +29,7 @@ class ProjectFactory extends Factory
                 $this->faker->imageUrl(800, 600, 'code'),
             ]),
             'media_id' => Media::inRandomOrder()->first()?->id,
-            'status' => $this->faker->randomElement(['active', 'inactive']),
+            'status' => $this->faker->randomElement(['Active', 'Inactive']),
         ];
     }
 }

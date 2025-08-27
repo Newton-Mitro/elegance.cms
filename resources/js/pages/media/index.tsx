@@ -1,9 +1,11 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Head, Link, router } from '@inertiajs/react';
-import { Eye, Pencil, Trash2 } from 'lucide-react';
+import { Eye, PaperclipIcon, Trash2, Upload } from 'lucide-react';
 import React from 'react';
+import HeadingSmall from '../../components/heading-small';
+import { Select } from '../../components/ui/select';
 import AppLayout from '../../layouts/app-layout';
-import { SharedData } from '../../types';
+import { BreadcrumbItem, SharedData } from '../../types';
 import { Media } from '../../types/media';
 import { PaginationLink } from '../../types/pagination_link';
 
@@ -21,52 +23,68 @@ const Index: React.FC<PageProps> = ({ mediaItems }) => {
         }
     };
 
-    console.log(mediaItems);
+    const breadcrumbs: BreadcrumbItem[] = [
+        { title: 'Dashboard', href: '/dashboard' },
+        { title: 'Medias', href: '/admin/media-files' },
+    ];
 
     return (
-        <AppLayout>
+        <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Media Files" />
             <div className="p-6">
-                <div className="mb-4 flex justify-between">
-                    <h1 className="text-xl font-bold">Media Files</h1>
-                    <Link href={route('media-files.create')} className="btn btn-primary">
-                        Upload Media
-                    </Link>
+                <div className="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row">
+                    <HeadingSmall title="Media Files" description="Manage media files" />
                 </div>
 
-                <div className="h-[calc(100vh-250px)] overflow-auto rounded border">
+                <div className="mb-4 flex items-center justify-between gap-2 sm:flex-row">
+                    <label className="flex cursor-pointer items-center gap-2 rounded bg-blue-900 px-3 py-1 text-sm hover:bg-blue-600">
+                        <Upload className="h-4 w-4" />
+                        <span>Upload</span>
+                        <input type="file" className="hidden" />
+                    </label>
+
+                    <Select
+                        // value={filter}
+                        // onChange={(e) => setFilter(e.target.value)}
+                        className="w-40 rounded border px-2 text-sm"
+                        options={[
+                            { value: 'all', label: 'All Types' },
+                            { value: 'images', label: 'Images' },
+                            { value: 'videos', label: 'Videos' },
+                            { value: 'audio', label: 'Audio' },
+                            { value: 'pdf', label: 'PDFs' },
+                            { value: 'docs', label: 'Word/Excel/PowerPoint' },
+                            { value: 'archives', label: 'Archives' },
+                        ]}
+                    />
+                </div>
+
+                <div className="h-[calc(100vh-300px)] overflow-auto rounded border">
                     <table className="w-full border-collapse">
-                        <thead className="sticky top-0 hidden bg-gray-900 shadow-sm md:table-header-group">
+                        <thead className="sticky top-0 hidden bg-accent shadow-sm md:table-header-group">
                             <tr>
                                 <th className="border p-2 text-left">File Name</th>
                                 <th className="border p-2 text-left">Mime</th>
-                                <th className="border p-2 text-left">Alt Text</th>
                                 <th className="border p-2 text-left">Preview</th>
                                 <th className="border p-2 text-left">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="flex flex-col md:table-row-group">
                             {mediaItems.data.map((media) => (
-                                <tr key={media.id} className="flex flex-col border-b even:bg-gray-900 md:table-row md:flex-row">
+                                <tr key={media.id} className="flex flex-col border-b even:bg-accent md:table-row md:flex-row">
                                     {/* Title */}
                                     <td className="border px-2 py-1">
-                                        <label className="font-semibold md:hidden">File Name</label>
-                                        <p>{media.file_name}</p>
+                                        <label className="font-semibold md:hidden">Media URL</label>
+                                        <p>{media.url}</p>
                                     </td>
 
-                                    {/* Year */}
+                                    {/* Mime */}
                                     <td className="border px-2 py-1">
                                         <label className="font-semibold md:hidden">Mime</label>
                                         <p>{media.file_type}</p>
                                     </td>
 
-                                    {/* Year */}
-                                    <td className="border px-2 py-1">
-                                        <label className="font-semibold md:hidden">Alt Text</label>
-                                        <p>{media.alt_text}</p>
-                                    </td>
-
-                                    {/* Image */}
+                                    {/* Preview */}
                                     <td className="border px-2 py-1">
                                         <label className="font-semibold md:hidden">Preview</label>
                                         {media.file_type.startsWith('image/') ? (
@@ -77,25 +95,7 @@ const Index: React.FC<PageProps> = ({ mediaItems }) => {
                                             />
                                         ) : (
                                             <div className="flex items-center space-x-1">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="24"
-                                                    height="24"
-                                                    viewBox="0 0 24 24"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                    className="lucide lucide-file-text-icon lucide-file-text"
-                                                >
-                                                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
-                                                    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
-                                                    <path d="M10 9H8" />
-                                                    <path d="M16 13H8" />
-                                                    <path d="M16 17H8" />
-                                                </svg>
-                                                <span className="text-sm">{media.file_name}</span>
+                                                <PaperclipIcon />
                                             </div>
                                         )}
                                     </td>
@@ -112,15 +112,6 @@ const Index: React.FC<PageProps> = ({ mediaItems }) => {
                                                         </Link>
                                                     </TooltipTrigger>
                                                     <TooltipContent>View</TooltipContent>
-                                                </Tooltip>
-
-                                                <Tooltip>
-                                                    <TooltipTrigger asChild>
-                                                        <Link href={route('media-files.edit', media.id)} className="text-green-500">
-                                                            <Pencil className="h-5 w-5" />
-                                                        </Link>
-                                                    </TooltipTrigger>
-                                                    <TooltipContent>Edit</TooltipContent>
                                                 </Tooltip>
 
                                                 <Tooltip>

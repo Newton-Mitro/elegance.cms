@@ -25,7 +25,7 @@ class ServiceFactory extends Factory
             ]),
             'icon_media_id' => Media::inRandomOrder()->first()?->id,
             'media_id' => Media::inRandomOrder()->first()?->id,
-            'status' => $this->faker->randomElement(['active', 'inactive']),
+            'status' => $this->faker->randomElement(['Active', 'Inactive']),
         ];
     }
 }

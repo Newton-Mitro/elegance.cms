@@ -16,13 +16,28 @@ class TeamFactory extends Factory
             'name' => $this->faker->name(),
             'designation' => $this->faker->jobTitle(),
             'bio' => $this->faker->paragraph(6),
-            'photo_media_id' => Media::inRandomOrder()->first()?->id,
-            'social_links' => json_encode([
-                'facebook' => 'https://facebook.com/' . $this->faker->userName(),
-                'twitter' => 'https://twitter.com/' . $this->faker->userName(),
-                'linkedin' => 'https://linkedin.com/in/' . $this->faker->userName(),
-                'github' => 'https://github.com/' . $this->faker->userName(),
-            ]),
+            'message' => $this->faker->sentence(),
+            'department' => $this->faker->word(),
+            'media_id' => Media::inRandomOrder()->first()?->id,
+
+            'facebook_links' => 'https://facebook.com/' . $this->faker->userName(),
+            'twitter_links' => 'https://twitter.com/' . $this->faker->userName(),
+            'linkedin_links' => 'https://linkedin.com/in/' . $this->faker->userName(),
+            'instagram_links' => 'https://instagram.com/' . $this->faker->userName(),
+            'youtube_links' => 'https://youtube.com/' . $this->faker->userName(),
+            'pinterest_links' => 'https://pinterest.com/' . $this->faker->userName(),
+            'tiktok_links' => 'https://tiktok.com/@' . $this->faker->userName(),
+            'snapchat_links' => 'https://snapchat.com/add/' . $this->faker->userName(),
+            'whatsapp_links' => 'https://wa.me/' . $this->faker->phoneNumber(),
+            'telegram_links' => 'https://t.me/' . $this->faker->userName(),
+            'github_links' => 'https://github.com/' . $this->faker->userName(),
+            'discord_links' => 'https://discordapp.com/users/' . $this->faker->randomNumber(6),
+
+            'email' => $this->faker->safeEmail(),
+            'phone' => $this->faker->phoneNumber(),
+            'address' => $this->faker->address(),
+
+            'status' => $this->faker->randomElement(['Active', 'Inactive']),
         ];
     }
 }

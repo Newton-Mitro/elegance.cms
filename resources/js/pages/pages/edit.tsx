@@ -2,7 +2,16 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { Head, router } from '@inertiajs/react';
 import React, { useState } from 'react';
+import HeadingSmall from '../../components/heading-small';
+import InputError from '../../components/input-error';
+import { MediaSelector } from '../../components/media-selector';
+import { Button } from '../../components/ui/button';
+import { Input } from '../../components/ui/input';
+import { Label } from '../../components/ui/label';
+import { Select } from '../../components/ui/select';
+import { Textarea } from '../../components/ui/text-area';
 import AppLayout from '../../layouts/app-layout';
+import { BreadcrumbItem } from '../../types';
 import { Media } from '../../types/media';
 import { Page } from '../../types/page';
 import { PageSection } from '../../types/page_section';
@@ -105,67 +114,79 @@ const Edit: React.FC<EditProps> = ({ page, sections, media }) => {
         setSelectedSectionIndex(null);
     };
 
+    const breadcrumbs: BreadcrumbItem[] = [
+        { title: 'Dashboard', href: '/dashboard' },
+        { title: 'Pages', href: '/admin/pages' },
+        { title: `Edit Page`, href: '' },
+    ];
+
     return (
-        <AppLayout>
+        <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Edit Page" />
-            <div className="mx-auto max-w-6xl space-y-8 p-6">
+            <div className="h-[calc(100vh-100px)] space-y-8 overflow-auto p-6">
                 {/* --- Page Metadata --- */}
-                <div className="space-y-4 rounded-lg bg-white p-6 shadow dark:bg-gray-800">
-                    <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Edit Page</h1>
+                <div className="space-y-4 rounded-lg border p-4 md:w-4xl">
+                    <HeadingSmall title="Edit Page" description="Edit page title, meta title, and meta description" />
                     <form onSubmit={handlePageSubmit} className="grid grid-cols-1 gap-4 md:grid-cols-3">
                         {/* Title */}
                         <div className="flex flex-col">
-                            <label className="mb-1 font-medium text-gray-700 dark:text-gray-300">Title</label>
-                            <input
+                            <Label htmlFor="title">Title</Label>
+                            <Input
+                                id="title"
+                                name="title"
                                 type="text"
                                 value={pageForm.title}
                                 onChange={(e) => setPageForm({ ...pageForm, title: e.target.value })}
-                                className="rounded border border-gray-300 bg-white px-3 py-2 text-gray-800 focus:border-blue-500 focus:ring focus:ring-blue-100 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-300"
+                                className="mt-1 block w-full"
+                                placeholder="Award title"
                                 required
                             />
+                            <InputError className="mt-2" message={''} />
                         </div>
 
                         {/* Meta Title */}
                         <div className="flex flex-col">
-                            <label className="mb-1 font-medium text-gray-700 dark:text-gray-300">Meta Title</label>
-                            <input
+                            <Label htmlFor="meta title">Meta Title</Label>
+                            <Input
+                                id="meta title"
+                                name="meta"
                                 type="text"
                                 value={pageForm.meta_title || ''}
                                 onChange={(e) => setPageForm({ ...pageForm, meta_title: e.target.value })}
-                                className="rounded border border-gray-300 bg-white px-3 py-2 text-gray-800 focus:border-blue-500 focus:ring focus:ring-blue-100 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-300"
+                                className="mt-1 block w-full"
+                                placeholder="Award title"
+                                required
                             />
+                            <InputError className="mt-2" message={''} />
                         </div>
 
                         {/* Meta Description (full width) */}
                         <div className="flex flex-col md:col-span-3">
-                            <label className="mb-1 font-medium text-gray-700 dark:text-gray-300">Meta Description</label>
-                            <textarea
+                            <Label htmlFor="meta description">Meta Description</Label>
+                            <Textarea
+                                id="meta description"
+                                name="meta description"
                                 value={pageForm.meta_description || ''}
                                 onChange={(e) => setPageForm({ ...pageForm, meta_description: e.target.value })}
-                                className="rounded border border-gray-300 bg-white px-3 py-2 text-gray-800 focus:border-blue-500 focus:ring focus:ring-blue-100 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-300"
+                                className="mt-1 block w-full"
                                 rows={3}
                             />
                         </div>
 
                         {/* Submit Button (full width) */}
                         <div className="md:col-span-3">
-                            <button
-                                type="submit"
-                                className="rounded bg-green-600 px-5 py-2 text-white transition hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600"
-                            >
-                                Update Page
-                            </button>
+                            <Button type="submit">Update Page</Button>
                         </div>
                     </form>
                 </div>
 
                 {/* --- Page Sections --- */}
                 <div className="space-y-6">
-                    <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">Page Sections</h2>
+                    <HeadingSmall title="Page Sections" description="Add or remove page sections" />
                     {pageSections.map((section, index) => (
-                        <div key={index} className="space-y-4 rounded-lg bg-white p-5 shadow dark:bg-gray-800">
+                        <div key={index} className="space-y-4 rounded-lg border p-4 md:w-4xl">
                             <div className="flex items-center justify-between">
-                                <h3 className="font-medium text-gray-700 dark:text-gray-300">Section {index + 1}</h3>
+                                <HeadingSmall title={`Section ${index + 1}`} description="Add, edit, or remove page sections" />
                                 <button
                                     type="button"
                                     onClick={() => removeSection(index)}
@@ -178,84 +199,102 @@ const Edit: React.FC<EditProps> = ({ page, sections, media }) => {
                             {/* Grid of inputs */}
                             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <div className="flex flex-col">
-                                    <label className="mb-1 font-medium text-gray-700 dark:text-gray-300">Heading</label>
-                                    <input
+                                    <Label htmlFor="heading">Heading</Label>
+                                    <Input
+                                        id="heading"
+                                        name="heading"
                                         type="text"
                                         value={section.heading || ''}
                                         onChange={(e) => updateSectionField(index, 'heading', e.target.value)}
-                                        className="rounded border border-gray-300 bg-white px-3 py-2 text-gray-800 focus:border-blue-500 focus:ring focus:ring-blue-100 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-300"
+                                        className="mt-1 block w-full"
+                                        placeholder="Heading"
+                                        required
                                     />
+                                    <InputError className="mt-2" message={''} />
                                 </div>
 
                                 <div className="flex flex-col">
-                                    <label className="mb-1 font-medium text-gray-700 dark:text-gray-300">Sub Heading</label>
-                                    <input
+                                    <Label htmlFor="sub_heading">Sub Heading</Label>
+                                    <Input
+                                        id="sub_heading"
+                                        name="sub_heading"
                                         type="text"
                                         value={section.sub_heading || ''}
                                         onChange={(e) => updateSectionField(index, 'sub_heading', e.target.value)}
-                                        className="rounded border border-gray-300 bg-white px-3 py-2 text-gray-800 focus:border-blue-500 focus:ring focus:ring-blue-100 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-300"
+                                        className="mt-1 block w-full"
+                                        placeholder="Sub Heading"
+                                        required
                                     />
+                                    <InputError className="mt-2" message={''} />
                                 </div>
 
                                 <div className="flex flex-col">
-                                    <label className="mb-1 font-medium text-gray-700 dark:text-gray-300">Button Text</label>
-                                    <input
+                                    <Label htmlFor="button_text">Button Text</Label>
+                                    <Input
+                                        id="button_text"
+                                        name="button_text"
                                         type="text"
                                         value={section.button_text || ''}
                                         onChange={(e) => updateSectionField(index, 'button_text', e.target.value)}
-                                        className="rounded border border-gray-300 bg-white px-3 py-2 text-gray-800 focus:border-blue-500 focus:ring focus:ring-blue-100 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-300"
+                                        className="mt-1 block w-full"
+                                        placeholder="Button Text"
+                                        required
                                     />
+                                    <InputError className="mt-2" message={''} />
                                 </div>
 
                                 <div className="flex flex-col">
-                                    <label className="mb-1 font-medium text-gray-700 dark:text-gray-300">Button Link</label>
-                                    <input
+                                    <Label htmlFor="button_link">Button Link</Label>
+                                    <Input
+                                        id="button_link"
+                                        name="button_link"
                                         type="text"
                                         value={section.button_link || ''}
                                         onChange={(e) => updateSectionField(index, 'button_link', e.target.value)}
-                                        className="rounded border border-gray-300 bg-white px-3 py-2 text-gray-800 focus:border-blue-500 focus:ring focus:ring-blue-100 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-300"
+                                        className="mt-1 block w-full"
+                                        placeholder="Button Link"
+                                        required
                                     />
+                                    <InputError className="mt-2" message={''} />
                                 </div>
                             </div>
 
                             {/* Media and gallery */}
                             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <div className="flex flex-col">
-                                    <label className="mb-1 font-medium text-gray-700 dark:text-gray-300">Content Type</label>
-                                    <select
+                                    <Label htmlFor={`content_type_${index}`}>Content Type</Label>
+                                    <Select
                                         value={section.content_type || 'custom_html'}
-                                        onChange={(e) => updateSectionField(index, 'content_type', e.target.value as PageSection['content_type'])}
-                                        className="rounded border border-gray-300 bg-white px-3 py-2 text-gray-800 focus:border-blue-500 focus:ring focus:ring-blue-100 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-300"
-                                    >
-                                        <option value="comma_seperated_list">Comma Separated List</option>
-                                        <option value="json_array_with_img_text">JSON Array with Image & Text</option>
-                                        <option value="json_array_with_fa_icon_&_text">JSON Array with FA Icon & Text</option>
-                                        <option value="json_array_with_question_&_answer">JSON Array with Question & Answer</option>
-                                        <option value="custom_html">Custom HTML</option>
-                                    </select>
+                                        onChange={(e) => updateSectionField(index, 'content_type', e.target.value)}
+                                        options={[
+                                            { value: 'comma_seperated_list', label: 'Comma Separated List' },
+                                            { value: 'json_array_with_img_text', label: 'JSON Array with Image & Text' },
+                                            { value: 'json_array_with_fa_icon_&_text', label: 'JSON Array with FA Icon & Text' },
+                                            { value: 'json_array_with_question_&_answer', label: 'JSON Array with Question & Answer' },
+                                            { value: 'custom_html', label: 'Custom HTML' },
+                                        ]}
+                                    />
                                 </div>
                             </div>
 
                             {/* Content */}
                             <div className="mt-2">
                                 <label className="mb-1 block font-medium">Content</label>
-                                <div className="rounded border bg-white p-1 dark:bg-gray-800">
-                                    <CKEditor
-                                        editor={ClassicEditor}
-                                        data={section.content || ''}
-                                        onChange={(_, editor) => updateSectionField(index, 'content', editor.getData())}
-                                    />
-                                </div>
+                                <CKEditor
+                                    editor={ClassicEditor}
+                                    data={section.content || ''}
+                                    onChange={(_, editor) => updateSectionField(index, 'content', editor.getData())}
+                                />
                             </div>
 
                             {/* Gallery */}
                             <div className="flex flex-col">
                                 <label className="mb-1 font-medium text-gray-700 dark:text-gray-300">Gallery URLs (comma separated)</label>
-                                <input
+                                <Input
                                     type="text"
                                     value={Array.isArray(section.gallery) ? section.gallery.join(',') : ''}
                                     onChange={(e) => updateSectionField(index, 'gallery', e.target.value.split(','))}
-                                    className="rounded border border-gray-300 bg-white px-3 py-2 text-gray-800 focus:border-blue-500 focus:ring focus:ring-blue-100 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-300"
+                                    className="mt-1 block w-full"
                                 />
                             </div>
 
@@ -263,22 +302,11 @@ const Edit: React.FC<EditProps> = ({ page, sections, media }) => {
                             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                                 <div className="flex flex-col">
                                     <label className="mb-1 font-medium text-gray-700 dark:text-gray-300">Section Media</label>
-                                    <button
-                                        type="button"
-                                        className="flex w-full items-center justify-between rounded border border-gray-300 bg-white px-3 py-2 text-left text-gray-800 hover:border-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 dark:hover:border-blue-400"
-                                        onClick={() => openMediaModal(index)}
-                                    >
-                                        {section.media_id ? `Media ID: ${section.media_id}` : '-- Select Media --'}
-                                    </button>
-                                    {section.media_id && (
-                                        <div className="mt-2">
-                                            <img
-                                                src={pageSections[index].media?.url}
-                                                alt={pageSections[index].media?.alt_text || 'Selected media'}
-                                                className="h-32 w-full rounded border object-cover"
-                                            />
-                                        </div>
-                                    )}
+                                    <MediaSelector
+                                        media={pageSections[index].media}
+                                        onSelect={() => openMediaModal(index)}
+                                        onRemove={() => updateSectionField(index, 'media', null)}
+                                    />
                                 </div>
                             </div>
 

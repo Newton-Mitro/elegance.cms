@@ -13,9 +13,9 @@ return new class extends Migration {
             $table->string('author_designation')->nullable();
             $table->string('company')->nullable();
             $table->longText('message');
-            $table->foreignId('photo_media_id')->nullable()->constrained('media')->nullOnDelete();
+            $table->foreignId('media_id')->nullable()->constrained('media')->nullOnDelete();
             $table->tinyInteger('rating')->nullable();
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->timestamps();
         });
     }

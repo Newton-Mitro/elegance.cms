@@ -10,7 +10,7 @@ export interface Service {
     media_id?: number | null;
     icon_media?: Media | null; // relation
     media?: Media | null; // relation
-    status: 'active' | 'inactive';
+    status: 'Active' | 'Inactive';
     created_at: string;
     updated_at: string;
 }

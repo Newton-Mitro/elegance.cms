@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('galleries', function (Blueprint $table) {
@@ -14,7 +13,7 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->foreignId('media_id')->constrained('media')->cascadeOnDelete();
             $table->string('category')->nullable();
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->timestamps();
         });
     }

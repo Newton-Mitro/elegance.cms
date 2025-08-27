@@ -18,7 +18,7 @@ class UpdateTestimonialRequest extends FormRequest
             'author_designation' => ['nullable', 'string', 'max:255'],
             'company' => ['nullable', 'string', 'max:255'],
             'message' => ['sometimes', 'required', 'string'],
-            'photo_media_id' => ['nullable', 'exists:media,id'],
+            'media_id' => ['nullable', 'exists:media,id'],
             'rating' => ['nullable', 'integer', 'between:1,5'],
         ];
     }

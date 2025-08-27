@@ -1,23 +1,31 @@
-import { Link } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import React from 'react';
-import { Award } from '../../types/award';
+import AppLayout from '../../layouts/app-layout';
+import { BreadcrumbItem } from '../../types';
+import { Page } from '../../types/page';
 
 interface PageProps {
-    award: Award;
+    page: Page;
 }
 
-const Show: React.FC<PageProps> = ({ award }) => {
-    console.log(award);
+const Show: React.FC<PageProps> = ({ page }) => {
+    const breadcrumbs: BreadcrumbItem[] = [
+        { title: 'Dashboard', href: '/dashboard' },
+        { title: 'Pages', href: '/admin/pages' },
+        { title: 'View Media', href: '' },
+    ];
     return (
-        <div className="p-6">
-            <h1 className="mb-2 text-xl font-bold">{award.title}</h1>
-            <p className="mb-2 text-gray-600">Year: {award.year}</p>
-            {award.image && <img src={award.image.url} alt={award.title} className="mb-4 h-40" />}
-            <p>{award.description}</p>
-            <Link href={route('awards.index')} className="btn mt-4">
-                Back to list
-            </Link>
-        </div>
+        <AppLayout breadcrumbs={breadcrumbs}>
+            <Head title="Show Page" />
+            <div className="p-6">
+                <h1 className="mb-2 text-xl font-bold">{page.title}</h1>
+                <p className="mb-2 text-gray-600"> {page.meta_title}</p>
+                <p>{page.meta_description}</p>
+                <Link href={route('pages.index')} className="btn mt-4">
+                    Back to list
+                </Link>
+            </div>
+        </AppLayout>
     );
 };
 

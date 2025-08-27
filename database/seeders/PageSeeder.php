@@ -12,13 +12,17 @@ class PageSeeder extends Seeder
     public function run(): void
     {
         $pages = [
-            'About',
-            'Mission',
-            'Vision',
-            'Disclaimer',
-            'Privacy Policy',
+            'Our Story',
+            'Our Mission',
+            'Our Vision',
+            'Our Values',
+            'Our Journey',
+            'Our Culture',
             'Founder Message',
             'Leaders Message',
+            'Disclaimer',
+            'Terms of Service',
+            'Privacy Policy',
         ];
 
         $now = Carbon::now();

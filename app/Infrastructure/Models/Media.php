@@ -23,7 +23,7 @@ class Media extends Model
     public function getUrlAttribute(): string
     {
         // If using public disk
-        return Storage::url($this->file_path);
+        return url(Storage::url($this->file_path));
     }
 
     protected static function newFactory()
