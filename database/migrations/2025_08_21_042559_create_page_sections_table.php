@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('page_sections', function (Blueprint $table) {
@@ -19,12 +18,12 @@ return new class extends Migration
             $table->json('gallery')->nullable();
             $table->foreignId('media_id')->nullable()->constrained('media')->nullOnDelete();
             $table->enum('content_type', [
-                'comma_seperated_list',
+                'comma_separated_list',
                 'json_array_with_img_text',
-                'json_array_with_fa_icon_&_text',
-                'json_array_with_question_&_answer',
+                'json_array_with_icon_text',
+                'json_array_with_question_answer',
                 'custom_html',
-            ])->nullable();
+            ]);
             $table->integer('sort_order')->default(0);
             $table->timestamps();
         });

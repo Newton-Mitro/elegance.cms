@@ -1,5 +1,6 @@
 import { Head } from '@inertiajs/react';
 import React from 'react';
+import MediaPreview from '../../components/media-preview';
 import AppLayout from '../../layouts/app-layout';
 import { BreadcrumbItem } from '../../types';
 import { Page } from '../../types/page';
@@ -17,23 +18,30 @@ const Show: React.FC<PageProps> = ({ page, sections }) => {
         { title: 'View Page', href: '' },
     ];
 
+    console.log(page);
+    console.log(sections);
+
     const renderSectionContent = (section: PageSection) => {
         switch (section.content_type) {
-            case 'comma_seperated_list':
+            case 'comma_separated_list':
                 return (
-                    <ul className="ml-5 list-disc">
-                        {section.content?.split(',').map((item, idx) => (
-                            <li key={idx}>{item.trim()}</li>
-                        ))}
-                    </ul>
+                    <>
+                        <div className="">{section.content_type}</div>
+                        <ul className="ml-5 list-disc">
+                            {section.content?.split(',').map((item, idx) => (
+                                <li key={idx}>{item.trim()}</li>
+                            ))}
+                        </ul>
+                    </>
                 );
             case 'json_array_with_img_text':
-            case 'json_array_with_fa_icon_&_text':
-            case 'json_array_with_question_&_answer':
+            case 'json_array_with_icon_text':
+            case 'json_array_with_question_answer':
                 try {
                     const items = section.content ? JSON.parse(section.content) : [];
                     return (
                         <div className="grid gap-4">
+                            <div className="">{section.content_type}</div>
                             {items.map((item: any, idx: number) => (
                                 <div key={idx}>
                                     {item.img && <img src={item.img} alt="" className="h-20 w-20 object-cover" />}
@@ -72,6 +80,7 @@ const Show: React.FC<PageProps> = ({ page, sections }) => {
                                     {section.heading && <h2 className="mb-2 text-lg font-semibold">{section.heading}</h2>}
                                     {section.sub_heading && <h3 className="text-md mb-2 text-gray-500">{section.sub_heading}</h3>}
                                     {renderSectionContent(section)}
+                                    {section.media && <MediaPreview media={section.media} />}
                                     {section.button_text && section.button_link && (
                                         <a
                                             href={section.button_link}
@@ -80,13 +89,14 @@ const Show: React.FC<PageProps> = ({ page, sections }) => {
                                             {section.button_text}
                                         </a>
                                     )}
-                                    {/* {section.gallery && section.gallery.length > 0 && (
+                                    <div className="">Gallery</div>
+                                    {section.gallery && section.gallery?.length > 0 && (
                                         <div className="mt-4 grid grid-cols-2 gap-2 md:grid-cols-4">
                                             {section.gallery.map((img, idx) => (
-                                                <img key={idx} src={img} alt="" className="h-32 w-full rounded object-cover" />
+                                                <img key={idx} src={img} alt={`gallery-${idx}`} className="h-32 w-full rounded object-cover" />
                                             ))}
                                         </div>
-                                    )} */}
+                                    )}
                                 </div>
                             ))}
                     </div>

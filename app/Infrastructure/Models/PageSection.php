@@ -10,7 +10,19 @@ class PageSection extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['page_id', 'content_type', 'content', 'sort_order'];
+    protected $fillable = [
+        'page_id',
+        'heading',
+        'sub_heading',
+        'button_text',
+        'button_link',
+        'content',
+        'gallery',
+        'media_id',
+        'content_type',
+        'sort_order',
+    ];
+
 
     protected $casts = [
         'content' => 'array',

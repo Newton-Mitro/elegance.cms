@@ -12,10 +12,10 @@ export interface PageSection {
     media_id?: number | null; // selected media
     media?: Media | null; // relation
     content_type?:
-        | 'comma_seperated_list'
+        | 'comma_separated_list'
         | 'json_array_with_img_text'
-        | 'json_array_with_fa_icon_&_text'
-        | 'json_array_with_question_&_answer'
+        | 'json_array_with_icon_text'
+        | 'json_array_with_question_answer'
         | 'custom_html';
     sort_order?: number;
     created_at?: string;
