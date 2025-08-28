@@ -9,6 +9,6 @@ class PageSectionSeeder extends Seeder
 {
     public function run(): void
     {
-        PageSection::factory(20)->create();
+        PageSection::factory(50)->create();
     }
 }

@@ -14,9 +14,6 @@ use Illuminate\Http\RedirectResponse;
 
 class PageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(): Response
     {
         $pages = Page::latest()->paginate(20);
@@ -26,9 +23,6 @@ class PageController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(Request $request): Response
     {
         $perPage = $request->input('perPage', 10);
@@ -39,9 +33,6 @@ class PageController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StorePageRequest $request): RedirectResponse
     {
         $data = $request->validated();
@@ -51,9 +42,6 @@ class PageController extends Controller
             ->with('success', 'Page created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Page $page): Response
     {
         $sections = PageSection::with('media')
@@ -70,7 +58,44 @@ class PageController extends Controller
     public function edit(Page $page, Request $request): Response
     {
         $perPage = $request->input('perPage', 10);
-        $media = Media::latest()->paginate($perPage)->withQueryString();
+        $filter = $request->input('type', 'all');
+
+        $mediaQuery = Media::latest();
+
+        switch ($filter) {
+            case 'images':
+                $mediaQuery->where('file_type', 'like', 'image/%');
+                break;
+            case 'videos':
+                $mediaQuery->where('file_type', 'like', 'video/%');
+                break;
+            case 'audio':
+                $mediaQuery->where('file_type', 'like', 'audio/%');
+                break;
+            case 'pdf':
+                $mediaQuery->where('file_type', 'application/pdf');
+                break;
+            case 'docs':
+                $mediaQuery->where(function ($q) {
+                    $q->where('file_type', 'like', '%word%')
+                        ->orWhere('file_type', 'like', '%excel%')
+                        ->orWhere('file_type', 'like', '%presentation%')
+                        ->orWhere('file_type', 'like', '%powerpoint%');
+                });
+                break;
+            case 'archives':
+                $mediaQuery->where(function ($q) {
+                    $q->where('file_type', 'like', '%zip%')
+                        ->orWhere('file_type', 'like', '%rar%')
+                        ->orWhere('file_type', 'like', '%tar%')
+                        ->orWhere('file_type', 'like', '%gzip%')
+                        ->orWhere('file_type', 'like', '%7z%');
+                });
+                break;
+        }
+
+        $media = $mediaQuery->paginate($perPage)->withQueryString();
+
         $sections = PageSection::with('media')
             ->where('page_id', $page->id)
             ->orderBy('sort_order', 'asc')
@@ -79,25 +104,23 @@ class PageController extends Controller
         return Inertia::render('pages/edit', [
             'page' => $page,
             'sections' => $sections,
-            'media' => $media
+            'media' => $media,
+            'filters' => [
+                'type' => $filter,
+                'perPage' => $perPage,
+            ],
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdatePageRequest $request, Page $page): RedirectResponse
     {
         $data = $request->validated();
         $page->update($data);
 
-        return redirect()->route('pages.index')
+        return redirect()->back()
             ->with('success', 'Page updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Page $page): RedirectResponse
     {
         $page->delete();

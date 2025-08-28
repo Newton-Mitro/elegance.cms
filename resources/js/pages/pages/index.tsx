@@ -2,6 +2,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { Head, Link } from '@inertiajs/react';
 import { Eye, Pencil } from 'lucide-react';
 import React from 'react';
+import HeadingSmall from '../../components/heading-small';
 import AppLayout from '../../layouts/app-layout';
 import { BreadcrumbItem, SharedData } from '../../types';
 import { Page } from '../../types/page';
@@ -24,8 +25,8 @@ const Index: React.FC<PageProps> = ({ pages }) => {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Pages" />
             <div className="p-6">
-                <div className="mb-4 flex justify-between">
-                    <h1 className="text-xl font-bold">Pages</h1>
+                <div className="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row">
+                    <HeadingSmall title="Pages" description="Manage your website's pages" />
                 </div>
 
                 <div className="h-[calc(100vh-250px)] overflow-auto rounded border">

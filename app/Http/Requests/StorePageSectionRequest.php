@@ -15,7 +15,7 @@ class StorePageSectionRequest extends FormRequest
     {
         return [
             'page_id' => ['required', 'exists:pages,id'],
-            'heading' => ['nullable', 'string', 'max:255'],
+            'heading' => ['required', 'string', 'max:255'],
             'sub_heading' => ['nullable', 'string', 'max:255'],
             'button_text' => ['nullable', 'string', 'max:255'],
             'button_link' => ['nullable', 'url', 'max:255'],
@@ -23,7 +23,7 @@ class StorePageSectionRequest extends FormRequest
             'gallery' => ['nullable', 'array'],
             'gallery.*' => ['string'], // array of image URLs or media paths
             'media_id' => ['nullable', 'exists:media,id'],
-            'content_type' => ['nullable', 'in:comma_seperated_list,json_array_with_img_text,json_array_with_fa_icon_&_text,json_array_with_question_&_answer,custom_html'],
+            'content_type' => ['nullable', 'in:json_array,custom_html'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
         ];
     }

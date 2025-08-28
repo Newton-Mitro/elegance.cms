@@ -40,7 +40,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Media',
-        href: '/admin/media-files',
+        href: '/admin/media',
         icon: UploadIcon,
     },
     {

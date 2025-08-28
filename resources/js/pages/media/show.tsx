@@ -49,7 +49,7 @@ const Show: React.FC<PageProps> = ({ media }) => {
 
     const breadcrumbs: BreadcrumbItem[] = [
         { title: 'Dashboard', href: '/dashboard' },
-        { title: 'Medias', href: '/admin/media-files' },
+        { title: 'Medias', href: '/admin/media' },
         { title: 'View Media', href: '' },
     ];
 
@@ -58,17 +58,15 @@ const Show: React.FC<PageProps> = ({ media }) => {
             <Head title="Show Media" />
             <div className="h-[calc(100vh-100px)] space-y-8 overflow-auto p-6">
                 {/* Page Header */}
-                <div className="space-y-4 rounded-lg border p-4 md:w-4xl">
-                    <HeadingSmall title="Show Media" description="Show media file details" />
-                </div>
+                <HeadingSmall title="Show Media" description="Show media file details" />
 
                 {/* Media Details */}
-                <div className="space-y-4 md:w-4xl">
+                <div className="md:w-3xl">
                     {/* Media Preview */}
                     <div className="rounded border p-2">{renderMediaPreview()}</div>
 
                     {/* Media Info */}
-                    <div className="space-y-2 p-4 text-gray-500">
+                    <div className="space-y-2 py-4 text-gray-500">
                         <div>
                             <span className="font-semibold">ID: </span>
                             <span>{media.id || '-'}</span>

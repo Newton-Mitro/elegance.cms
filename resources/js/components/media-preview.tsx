@@ -8,51 +8,67 @@ interface MediaPreviewProps {
 const MediaPreview: React.FC<MediaPreviewProps> = ({ media }) => {
     const type = media.file_type.toLowerCase();
 
+    // Responsive height classes
+    const imgHeight = 'h-48 sm:h-64';
+    const videoHeight = 'h-64 sm:h-80';
+    const embedHeight = 'h-96 sm:h-[32rem]';
+
+    const containerClass = 'mt-4';
+    const borderBgClass = 'rounded-lg border bg-gray-50 dark:bg-gray-800 dark:border-gray-700';
+    const textClass = 'text-sm text-gray-700 dark:text-gray-300 truncate';
+
     if (type.startsWith('image/')) {
         return (
-            <div className="mt-4">
-                <img src={media.url} alt={media.alt_text || media.file_name} className="max-h-64 w-full rounded-lg object-cover shadow" />
+            <div className={containerClass}>
+                <img
+                    src={media.url}
+                    alt={media.alt_text || media.file_name}
+                    className={`${imgHeight} w-full rounded-lg object-cover shadow-sm dark:shadow-none`}
+                />
             </div>
         );
     }
 
     if (type.startsWith('video/')) {
         return (
-            <div className="mt-4">
-                <video controls className="max-h-80 w-full rounded-lg shadow">
+            <div className={containerClass}>
+                <video controls className={`${videoHeight} w-full rounded-lg shadow-sm dark:shadow-none`}>
                     <source src={media.url} type={media.file_type} />
                     Your browser does not support the video tag.
                 </video>
-                <p className="mt-2 text-sm text-gray-500">{media.file_name}</p>
             </div>
         );
     }
 
     if (type.startsWith('audio/')) {
         return (
-            <div className="mt-4">
+            <div className={containerClass}>
                 <audio controls className="w-full">
                     <source src={media.url} type={media.file_type} />
                     Your browser does not support the audio element.
                 </audio>
-                <p className="mt-2 text-sm text-gray-500">{media.file_name}</p>
             </div>
         );
     }
 
     if (type === 'application/pdf') {
         return (
-            <div className="mt-4">
-                <embed src={media.url} type="application/pdf" className="h-96 w-full rounded-lg border" />
-                <p className="mt-2 text-sm text-gray-500">{media.file_name}</p>
+            <div className={containerClass}>
+                <embed src={media.url} type="application/pdf" className={`${embedHeight} w-full rounded-lg border dark:border-gray-700`} />
+                <p className={`mt-1 ${textClass}`}>{media.file_name}</p>
             </div>
         );
     }
 
-    // fallback for other file types (docs, zips, etc.)
+    // fallback for other file types (docs, archives, etc.)
     return (
-        <div className="mt-4 rounded border bg-gray-50 p-3">
-            <a href={media.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+        <div className={`${containerClass} ${borderBgClass} p-2`}>
+            <a
+                href={media.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block truncate text-sm text-blue-600 hover:underline dark:text-blue-400"
+            >
                 {media.file_name}
             </a>
         </div>

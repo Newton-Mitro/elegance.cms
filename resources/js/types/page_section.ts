@@ -11,12 +11,7 @@ export interface PageSection {
     gallery?: string[] | null; // JSON array of image URLs or IDs
     media_id?: number | null; // selected media
     media?: Media | null; // relation
-    content_type?:
-        | 'comma_separated_list'
-        | 'json_array_with_img_text'
-        | 'json_array_with_icon_text'
-        | 'json_array_with_question_answer'
-        | 'custom_html';
+    content_type?: 'json_array' | 'custom_html';
     sort_order?: number;
     created_at?: string;
     updated_at?: string;
