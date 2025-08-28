@@ -1,4 +1,5 @@
 import { Head } from '@inertiajs/react';
+
 import React from 'react';
 import Gallery from '../../components/gallery';
 import HeadingSmall from '../../components/heading-small';
@@ -36,7 +37,7 @@ const Show: React.FC<PageProps> = ({ page, sections }) => {
                                             className="h-16 w-16 flex-shrink-0 rounded object-cover"
                                         />
                                     )}
-                                    {item.icon && <i className={`${item.icon} text-base`} />}
+                                    {item.icon && <i className={`fa-solid ${item.icon}`}></i>}
                                     <div className="flex flex-col gap-0.5 text-sm">
                                         {item.title && <p className="font-semibold">{item.title}</p>}
                                         {item.subtitle && <p className="text-gray-700">{item.subtitle}</p>}
@@ -64,7 +65,7 @@ const Show: React.FC<PageProps> = ({ page, sections }) => {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={`Show Page - ${page.title}`} />
-            <div className="space-y-4 p-4">
+            <div className="h-[calc(100vh-100px)] space-y-8 overflow-auto p-6">
                 <HeadingSmall title={page.title} description={page.meta_description || ''} />
 
                 {sections.length > 0 ? (

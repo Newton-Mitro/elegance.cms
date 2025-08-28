@@ -377,7 +377,10 @@ const Edit: React.FC<EditProps> = ({ page, sections, media }) => {
                                         value={section.content_type || 'custom_html'}
                                         onChange={(e) => updateSectionField(index, 'content_type', e.target.value)}
                                         options={[
-                                            { value: 'json_array', label: 'Json Array' },
+                                            {
+                                                value: 'json_array',
+                                                label: 'Json Array',
+                                            },
                                             { value: 'custom_html', label: 'Custom HTML' },
                                         ]}
                                     />
@@ -399,6 +402,7 @@ const Edit: React.FC<EditProps> = ({ page, sections, media }) => {
 
                             {/* Content */}
                             <div className="mt-2">
+                                <label className="text-xs text-gray-500">{`json_array: [{"title":"", "subtitle":"", "image":"", "icon":"", "question":"", "answer":""},]`}</label>
                                 <label className="mb-1 block font-medium">Content</label>
                                 <CKEditor
                                     editor={ClassicEditor as any}
