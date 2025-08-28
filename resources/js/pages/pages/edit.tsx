@@ -401,7 +401,7 @@ const Edit: React.FC<EditProps> = ({ page, sections, media }) => {
                             <div className="mt-2">
                                 <label className="mb-1 block font-medium">Content</label>
                                 <CKEditor
-                                    editor={ClassicEditor}
+                                    editor={ClassicEditor as any}
                                     data={section.content || ''}
                                     onChange={(_, editor) => updateSectionField(index, 'content', editor.getData())}
                                 />

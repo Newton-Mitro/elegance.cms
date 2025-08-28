@@ -52,7 +52,12 @@ const Show: React.FC<PageProps> = ({ page, sections }) => {
                 }
 
             default:
-                return <div dangerouslySetInnerHTML={{ __html: section.content || '' }} className="text-sm" />;
+                return (
+                    <div
+                        dangerouslySetInnerHTML={{ __html: section.content || '' }}
+                        className="prose prose-sm [&_table]:border [&_table]:border-gray-500 [&_td]:border [&_td]:border-gray-500 [&_th]:border [&_th]:border-gray-500"
+                    />
+                );
         }
     };
 
