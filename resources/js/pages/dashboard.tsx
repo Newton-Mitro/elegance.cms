@@ -1,33 +1,150 @@
-import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/react';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import { Head, usePage } from '@inertiajs/react';
 
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Dashboard',
-        href: '/dashboard',
-    },
-];
+// Charts
+import { ArcElement, BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js';
+import { Bar, Line } from 'react-chartjs-2';
+import MediaPreview from '../components/media-preview';
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, Title, Tooltip, Legend, ArcElement);
+
+const breadcrumbs: BreadcrumbItem[] = [{ title: 'Dashboard', href: '/dashboard' }];
 
 export default function Dashboard() {
+    const { stats, monthlyVisitors, routeVisits, latestNotices, applications, media }: any = usePage().props;
+
+    // Prepare chart data
+    const monthlyVisitorsData = {
+        labels: Object.keys(monthlyVisitors),
+        datasets: [
+            {
+                label: 'Visitors',
+                data: Object.values(monthlyVisitors),
+                fill: true,
+                backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                borderColor: 'rgba(37, 99, 235, 1)',
+                tension: 0.3,
+            },
+        ],
+    };
+
+    const routeVisitedData = {
+        labels: Object.keys(routeVisits),
+        datasets: [
+            {
+                label: 'Visits',
+                data: Object.values(routeVisits),
+                backgroundColor: [
+                    'rgba(37, 99, 235, 0.7)',
+                    'rgba(16, 185, 129, 0.7)',
+                    'rgba(168, 85, 247, 0.7)',
+                    'rgba(234, 179, 8, 0.7)',
+                    'rgba(239, 68, 68, 0.7)',
+                    'rgba(99, 102, 241, 0.7)',
+                ],
+            },
+        ],
+    };
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
-            <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4 overflow-x-auto">
-                <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-                    <div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+            <div className="h-[calc(100vh-100px)] space-y-8 overflow-auto p-6">
+                {/* 🔹 Top KPI Cards */}
+                <div className="grid gap-4 md:grid-cols-3 xl:grid-cols-6">
+                    {[
+                        { label: 'Pages', value: stats.pages, icon: 'fa-users', color: 'text-blue-500' },
+                        { label: 'Products', value: stats.products, icon: 'fa-box-open', color: 'text-purple-500' },
+                        { label: 'Services', value: stats.services, icon: 'fa-cogs', color: 'text-orange-500' },
+                        { label: 'Contact Messages', value: stats.contactMessages, icon: 'fa-newspaper', color: 'text-pink-500' },
+                        { label: 'Teams', value: stats.teams, icon: 'fa-calendar-days', color: 'text-red-500' },
+                        { label: 'Students', value: stats.students, icon: 'fa-user-graduate', color: 'text-green-500' },
+                    ].map((stat, idx) => (
+                        <div
+                            key={idx}
+                            className="flex flex-col items-start justify-between rounded-xl border border-sidebar-border/70 bg-white p-4 shadow-sm dark:border-sidebar-border dark:bg-neutral-900"
+                        >
+                            <i className={`fa-solid ${stat.icon} ${stat.color} mb-2 text-2xl`} />
+                            <div className="text-2xl font-bold">{stat.value}</div>
+                            <div className="text-sm text-gray-500">{stat.label}</div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* 🔹 Graphs */}
+                <div className="grid gap-4 md:grid-cols-10">
+                    {/* Left chart: 40% → span 4 of 10 */}
+                    <div className="col-span-10 rounded-xl border border-sidebar-border/70 bg-white p-4 shadow-sm md:col-span-4 dark:border-sidebar-border dark:bg-neutral-900">
+                        <h2 className="mb-3 text-lg font-semibold">Monthly Visitors</h2>
+                        <Line data={monthlyVisitorsData} />
                     </div>
-                    <div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                    </div>
-                    <div className="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+
+                    {/* Right chart: 60% → span 6 of 10 */}
+                    <div className="col-span-10 rounded-xl border border-sidebar-border/70 bg-white p-4 shadow-sm md:col-span-6 dark:border-sidebar-border dark:bg-neutral-900">
+                        <h2 className="mb-3 text-lg font-semibold">Top Visited Pages</h2>
+                        <Bar data={routeVisitedData} />
                     </div>
                 </div>
-                <div className="relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border">
-                    <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+
+                {/* 🔹 Recent Content */}
+                <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                    <div className="rounded-xl border border-sidebar-border/70 bg-white p-4 shadow-sm dark:border-sidebar-border dark:bg-neutral-900">
+                        <h2 className="mb-3 text-lg font-semibold">Latest Notices</h2>
+                        <ul className="space-y-2 text-sm">
+                            {latestNotices.map((notice: any) => (
+                                <li key={notice.id} className="flex justify-between">
+                                    <span>{notice.title}</span>
+                                    <span className="text-gray-500">{new Date(notice.created_at).toLocaleDateString()}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div className="rounded-xl border border-sidebar-border/70 bg-white p-4 shadow-sm dark:border-sidebar-border dark:bg-neutral-900">
+                        <h2 className="mb-3 text-lg font-semibold">Recent Job Applications</h2>
+                        <ul className="space-y-2 text-sm">
+                            {applications.map((a: any) => (
+                                <li key={a.id} className="flex justify-between">
+                                    <span>{a.name}</span>
+                                    <span className="text-gray-500">{a.position}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div className="rounded-xl border border-sidebar-border/70 bg-white p-4 shadow-sm dark:border-sidebar-border dark:bg-neutral-900">
+                        <h2 className="mb-3 text-lg font-semibold">Recent Media Uploads</h2>
+                        <div className="grid grid-cols-3 gap-2">
+                            {media.map((m: any) => (
+                                <MediaPreview key={m.id} media={m} imgHeight="h-20" videoHeight="h-20" embedHeight="h-20" />
+                                // <img key={m.id} src={m.url} alt="" className="h-20 w-full rounded object-cover" />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {/* 🔹 Quick Actions */}
+                <div className="rounded-xl border border-sidebar-border/70 bg-white p-4 shadow-sm dark:border-sidebar-border dark:bg-neutral-900">
+                    <h2 className="mb-3 text-lg font-semibold">Quick Actions</h2>
+                    <div className="flex flex-wrap gap-2">
+                        {[
+                            { label: 'Add Blog', icon: 'fa-newspaper' },
+                            { label: 'Add Product', icon: 'fa-box-open' },
+                            { label: 'Add Service', icon: 'fa-cogs' },
+                            { label: 'Add Notice', icon: 'fa-bullhorn' },
+                            { label: 'Add Event', icon: 'fa-calendar-plus' },
+                        ].map((action, idx) => (
+                            <button
+                                key={idx}
+                                className="flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-sm text-white hover:bg-blue-600"
+                            >
+                                <i className={`fa-solid ${action.icon}`} />
+                                {action.label}
+                            </button>
+                        ))}
+                    </div>
                 </div>
             </div>
         </AppLayout>

@@ -11,10 +11,7 @@ class LogVisitor
 {
     public function handle(Request $request, Closure $next)
     {
-        // Identify visitor session
         $sessionId = $request->session()->getId();
-
-        // Gather visitor info
         $ip = $request->ip();
         $userAgent = $request->userAgent() ?? '';
         $device = $this->getDeviceType($userAgent);
@@ -36,26 +33,28 @@ class LogVisitor
             ]
         );
 
-        // Log route visit
-        DB::table('route_visit_logs')->insert([
-            'user_id' => auth()->id(),
-            'route' => $request->route()?->getName() ?? $request->path(),
-            'method' => $request->method(),
-            'ip_address' => $ip,
-            'user_agent' => $userAgent,
-            'query_params' => json_encode($request->query()),
-            'request_body' => json_encode($request->except(['_token', '_method'])),
-            'visited_at' => now(),
-        ]);
+        // Skip logging for admin/dashboard routes
+        $routeName = $request->path();
+        if (!Str::contains($routeName, ['dashboard', 'admin'])) {
+            DB::table('route_visit_logs')->insert([
+                'user_id' => auth()->id(),
+                'route' => $request->route()?->getName() ?? $request->path(),
+                'method' => $request->method(),
+                'ip_address' => $ip,
+                'user_agent' => $userAgent,
+                'query_params' => json_encode($request->query()),
+                'request_body' => json_encode($request->except(['_token', '_method'])),
+                'visited_at' => now(),
+            ]);
+        }
 
         return $next($request);
     }
 
     private function getDeviceType(string $userAgent): string
     {
-        if (Str::contains($userAgent, ['iPhone', 'Android'])) {
+        if (Str::contains($userAgent, ['iPhone', 'Android']))
             return 'Mobile';
-        }
         return 'Desktop';
     }
 

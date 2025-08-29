@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Infrastructure\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PostCategory extends Model
+class Student extends Model
 {
-    /** @use HasFactory<\Database\Factories\PostCategoryFactory> */
+    /** @use HasFactory<\Database\Factories\StudentFactory> */
     use HasFactory;
 }

@@ -3,15 +3,18 @@ import { Media } from '../types/media';
 
 interface MediaPreviewProps {
     media: Media;
+    imgHeight?: string; // optional Tailwind height classes
+    videoHeight?: string;
+    embedHeight?: string;
 }
 
-const MediaPreview: React.FC<MediaPreviewProps> = ({ media }) => {
+const MediaPreview: React.FC<MediaPreviewProps> = ({
+    media,
+    imgHeight = 'h-48 sm:h-64', // default heights
+    videoHeight = 'h-64 sm:h-80',
+    embedHeight = 'h-96 sm:h-[32rem]',
+}) => {
     const type = media.file_type.toLowerCase();
-
-    // Responsive height classes
-    const imgHeight = 'h-48 sm:h-64';
-    const videoHeight = 'h-64 sm:h-80';
-    const embedHeight = 'h-96 sm:h-[32rem]';
 
     const containerClass = 'mt-4';
     const borderBgClass = 'rounded-lg border bg-gray-50 dark:bg-gray-800 dark:border-gray-700';
@@ -60,7 +63,7 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({ media }) => {
         );
     }
 
-    // fallback for other file types (docs, archives, etc.)
+    // fallback for other file types
     return (
         <div className={`${containerClass} ${borderBgClass} p-2`}>
             <a

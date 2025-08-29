@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Infrastructure\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ServiceCategory extends Model
+class Blog extends Model
 {
-    /** @use HasFactory<\Database\Factories\ServiceCategoryFactory> */
+    /** @use HasFactory<\Database\Factories\BlogFactory> */
     use HasFactory;
 }
