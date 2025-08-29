@@ -21,7 +21,6 @@ import {
     RssIcon,
     School2Icon,
     SettingsIcon,
-    ShieldAlertIcon,
     SplitIcon,
     StoreIcon,
     TrophyIcon,
@@ -127,11 +126,6 @@ const mainNavItems: NavItem[] = [
         title: 'Partners',
         href: '/admin/partners',
         icon: HandshakeIcon,
-    },
-    {
-        title: 'FAQs',
-        href: '/admin/faqs',
-        icon: ShieldAlertIcon,
     },
     {
         title: 'Awards',

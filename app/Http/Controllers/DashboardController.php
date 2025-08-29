@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Infrastructure\Models\Career;
+use App\Infrastructure\Models\Contact;
 use App\Infrastructure\Models\ContactMessage;
 use App\Infrastructure\Models\JobApplication;
 use App\Infrastructure\Models\Media;
 use App\Infrastructure\Models\Notice;
 use App\Infrastructure\Models\Page;
+use App\Infrastructure\Models\Project;
 use App\Infrastructure\Models\RouteVisitLog;
 use App\Infrastructure\Models\Student;
 use App\Infrastructure\Models\Product;
 use App\Infrastructure\Models\Service;
 use App\Infrastructure\Models\Event;
+use App\Infrastructure\Models\User;
 use App\Infrastructure\Models\Visitor;
 use Inertia\Inertia;
 
@@ -21,12 +25,18 @@ class DashboardController extends Controller
     {
         // Top KPIs
         $stats = [
+            'users' => User::count(),
             'pages' => Page::count(),
             'products' => Product::count(),
+            'orders' => Product::count(),
+            'payments' => Product::count(),
             'services' => Service::count(),
-            'contactMessages' => ContactMessage::count(),
+            'appointments' => Service::count(),
+            'officeLocations' => Contact::count(),
             'teams' => Event::count(),
+            'jobCirculars' => Career::count(),
             'students' => Student::count(),
+            'projects' => Project::count(),
         ];
 
         // ------------------------
@@ -50,18 +60,18 @@ class DashboardController extends Controller
         }
 
         // ------------------------
-        // Route Visits (Top 6)
+        // Route Visits (Top 16)
         // ------------------------
         $routeVisits = RouteVisitLog::selectRaw('route, COUNT(*) as total')
             ->groupBy('route')
             ->orderByDesc('total')
-            ->limit(6)
+            ->limit(16)
             ->pluck('total', 'route');
 
         // ------------------------
         // Latest Blogs
         // ------------------------
-        $latestNotices = Notice::latest()->take(3)->get(['id', 'title', 'created_at']);
+        $latestNotices = Notice::latest()->take(7)->get(['id', 'title', 'created_at']);
 
         // ------------------------
         // Job Applications

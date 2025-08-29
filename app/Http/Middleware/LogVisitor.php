@@ -35,10 +35,23 @@ class LogVisitor
 
         // Skip logging for admin/dashboard routes
         $routeName = $request->path();
-        if (!Str::contains($routeName, ['dashboard', 'admin'])) {
+        if (
+            !Str::contains($routeName, [
+                'dashboard',
+                'admin',
+                'login',
+                'register',
+                'password',
+                'password/reset',
+                'password/email',
+                'password/confirm',
+                'password/verify',
+                'logout',
+            ])
+        ) {
             DB::table('route_visit_logs')->insert([
                 'user_id' => auth()->id(),
-                'route' => $request->route()?->getName() ?? $request->path(),
+                'route' => $routeName,
                 'method' => $request->method(),
                 'ip_address' => $ip,
                 'user_agent' => $userAgent,

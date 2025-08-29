@@ -45,6 +45,7 @@ Route::get('/awards', [AwardController::class, 'publicIndex'])->name('awards.pub
 Route::get('/awards/{award}', [AwardController::class, 'publicShow'])->name('awards.publicShow');
 
 Route::prefix('admin')
+    ->middleware(['auth', 'verified'])
     ->group(function () {
         // Awards
         Route::resource('awards', AwardController::class);
