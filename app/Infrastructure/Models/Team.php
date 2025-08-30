@@ -11,6 +11,10 @@ class Team extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'designation', 'bio', 'photo_id', 'sort_order'];
+    protected $casts = [
+        'content' => 'array',
+        'gallery' => 'array',
+    ];
 
     public function photo()
     {

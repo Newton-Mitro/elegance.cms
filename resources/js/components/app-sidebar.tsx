@@ -52,19 +52,14 @@ const mainNavItems: NavItem[] = [
         icon: ImagesIcon,
     },
     {
-        title: 'Team Categories',
-        href: '/admin/team_categories',
+        title: 'Categories',
+        href: '/admin/categories',
         icon: SplitIcon,
     },
     {
         title: 'Teams',
         href: '/admin/teams',
         icon: BriefcaseIcon,
-    },
-    {
-        title: 'Service Categories',
-        href: '/admin/service_categories',
-        icon: SplitIcon,
     },
     {
         title: 'Services',
@@ -77,19 +72,9 @@ const mainNavItems: NavItem[] = [
         icon: CalendarCheck2Icon,
     },
     {
-        title: 'Product Categories',
-        href: '/admin/product_categories',
-        icon: SplitIcon,
-    },
-    {
         title: 'Products',
         href: '/admin/products',
         icon: StoreIcon,
-    },
-    {
-        title: 'Project Categories',
-        href: '/admin/project_categories',
-        icon: SplitIcon,
     },
     {
         title: 'Projects',
@@ -110,11 +95,6 @@ const mainNavItems: NavItem[] = [
         title: 'Galleries',
         href: '/admin/galleries',
         icon: ImagePlusIcon,
-    },
-    {
-        title: 'Class Levels',
-        href: '/admin/class_levels',
-        icon: SplitIcon,
     },
     {
         title: 'Students',
@@ -145,11 +125,6 @@ const mainNavItems: NavItem[] = [
         title: 'Testimonials',
         href: '/admin/testimonials',
         icon: BadgeCheckIcon,
-    },
-    {
-        title: 'Post Categories',
-        href: '/admin/post_categories',
-        icon: SplitIcon,
     },
     {
         title: 'Blogs',

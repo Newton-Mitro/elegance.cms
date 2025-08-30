@@ -11,6 +11,10 @@ class Service extends Model
     use HasFactory;
 
     protected $fillable = ['title', 'slug', 'description', 'icon_media_id', 'media_id', 'status'];
+    protected $casts = [
+        'content' => 'array',
+        'gallery' => 'array',
+    ];
 
     public function icon()
     {

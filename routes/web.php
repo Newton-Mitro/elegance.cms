@@ -25,7 +25,6 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HeroSliderController;
 use App\Http\Controllers\PageSectionController;
 use App\Http\Controllers\TestimonialController;
-use App\Http\Controllers\PostCategoryController;
 use App\Http\Controllers\RouteVisitLogController;
 use App\Http\Controllers\ContactMessageController;
 
@@ -85,9 +84,6 @@ Route::prefix('admin')
 
         // Page Sections
         Route::resource('page-sections', PageSectionController::class);
-
-        // Post Categories
-        Route::resource('post-categories', PostCategoryController::class);
 
         // Posts
         Route::resource('posts', PostController::class);

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Infrastructure\Models\Category;
 use App\Infrastructure\Models\Media;
 use App\Infrastructure\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -24,10 +25,10 @@ class ProjectFactory extends Factory
             'live_site_link' => $this->faker->url(),
             'start_date' => $this->faker->dateTimeBetween('-2 years', '-6 months')->format('Y-m-d'),
             'end_date' => optional($this->faker->optional()->dateTimeBetween('-6 months', 'now'))->format('Y-m-d'),
-            'gallery' => json_encode([
-                $this->faker->imageUrl(800, 600, 'project'),
-                $this->faker->imageUrl(800, 600, 'code'),
-            ]),
+            'gallery' => Media::inRandomOrder()->take(2)->get()->pluck('url')->toArray(),
+            'category_id' => Category::where('category_of', 'Project')->inRandomOrder()->first()?->id
+                ?? Category::factory()->create(['category_of' => 'Project'])->id,
+
             'media_id' => Media::inRandomOrder()->first()?->id,
             'status' => $this->faker->randomElement(['Active', 'Inactive']),
         ];

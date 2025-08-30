@@ -11,6 +11,10 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = ['title', 'slug', 'description', 'thumbnail_id', 'status'];
+    protected $casts = [
+        'content' => 'array',
+        'gallery' => 'array',
+    ];
 
     public function thumbnail()
     {

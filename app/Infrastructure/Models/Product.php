@@ -12,6 +12,11 @@ class Product extends Model
 
     protected $fillable = ['title', 'slug', 'description', 'price', 'thumbnail_id', 'status'];
 
+    protected $casts = [
+        'content' => 'array',
+        'gallery' => 'array',
+    ];
+
     public function thumbnail()
     {
         return $this->belongsTo(Media::class, 'thumbnail_id');

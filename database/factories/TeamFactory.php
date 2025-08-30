@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Infrastructure\Models\Category;
 use App\Infrastructure\Models\Media;
 use App\Infrastructure\Models\Team;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -36,6 +37,9 @@ class TeamFactory extends Factory
             'email' => $this->faker->safeEmail(),
             'phone' => $this->faker->phoneNumber(),
             'address' => $this->faker->address(),
+
+            'category_id' => Category::where('category_of', 'Team')->inRandomOrder()->first()?->id
+                ?? Category::factory()->create(['category_of' => 'Team'])->id,
 
             'status' => $this->faker->randomElement(['Active', 'Inactive']),
         ];
