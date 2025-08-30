@@ -47,6 +47,7 @@ class LogVisitor
                 'password/confirm',
                 'password/verify',
                 'logout',
+                'settings',
             ])
         ) {
             DB::table('route_visit_logs')->insert([
