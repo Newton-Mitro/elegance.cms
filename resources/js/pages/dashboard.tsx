@@ -69,11 +69,16 @@ export default function Dashboard() {
                     ].map((stat, idx) => (
                         <div
                             key={idx}
-                            className="flex flex-col items-start justify-between rounded-xl border border-sidebar-border/70 bg-white p-4 shadow-sm dark:border-sidebar-border dark:bg-neutral-900"
+                            className="flex items-center rounded-xl border border-sidebar-border/70 bg-white p-4 shadow-sm dark:border-sidebar-border dark:bg-neutral-900"
                         >
-                            <i className={`fa-solid ${stat.icon} ${stat.color} mb-2 text-2xl`} />
-                            <div className="text-2xl font-bold">{stat.value}</div>
-                            <div className="text-sm text-gray-500">{stat.label}</div>
+                            {/* Icon on the left */}
+                            <i className={`fa-solid ${stat.icon} ${stat.color} mr-6 text-3xl`} />
+
+                            {/* Text block */}
+                            <div>
+                                <div className="text-2xl font-bold">{stat.value}</div>
+                                <div className="text-sm text-gray-500">{stat.label}</div>
+                            </div>
                         </div>
                     ))}
                 </div>

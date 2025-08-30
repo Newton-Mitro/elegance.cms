@@ -20,13 +20,11 @@ import {
     PickaxeIcon,
     RssIcon,
     School2Icon,
-    SettingsIcon,
     SplitIcon,
     StoreIcon,
     TrophyIcon,
     UploadIcon,
     UserRoundCheckIcon,
-    UsersRoundIcon,
     ViewIcon,
 } from 'lucide-react';
 import AppLogo from './app-logo';
@@ -156,16 +154,6 @@ const mainNavItems: NavItem[] = [
         title: 'Blogs',
         href: '/admin/posts',
         icon: RssIcon,
-    },
-    {
-        title: 'Users',
-        href: '/admin/users',
-        icon: UsersRoundIcon,
-    },
-    {
-        title: 'Site Settings',
-        href: '/admin/settings',
-        icon: SettingsIcon,
     },
 ];
 
