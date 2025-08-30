@@ -67,13 +67,33 @@ const mainNavItems: NavItem[] = [
         icon: HandPlatterIcon,
     },
     {
-        title: 'Service Appointments',
+        title: 'Appointments',
         href: '/admin/appointments',
         icon: CalendarCheck2Icon,
     },
     {
+        title: 'Inventory Logs',
+        href: '/admin/inventory_logs',
+        icon: StoreIcon,
+    },
+    {
         title: 'Products',
         href: '/admin/products',
+        icon: StoreIcon,
+    },
+    {
+        title: 'Orders',
+        href: '/admin/orders',
+        icon: StoreIcon,
+    },
+    {
+        title: 'Cupons',
+        href: '/admin/cupons',
+        icon: StoreIcon,
+    },
+    {
+        title: 'Payments',
+        href: '/admin/payments',
         icon: StoreIcon,
     },
     {
@@ -87,11 +107,6 @@ const mainNavItems: NavItem[] = [
         icon: BellDotIcon,
     },
     {
-        title: 'Events',
-        href: '/admin/events',
-        icon: CalendarClockIcon,
-    },
-    {
         title: 'Galleries',
         href: '/admin/galleries',
         icon: ImagePlusIcon,
@@ -102,16 +117,6 @@ const mainNavItems: NavItem[] = [
         icon: School2Icon,
     },
     {
-        title: 'Partners',
-        href: '/admin/partners',
-        icon: HandshakeIcon,
-    },
-    {
-        title: 'Awards',
-        href: '/admin/awards',
-        icon: TrophyIcon,
-    },
-    {
         title: 'Job Circulars',
         href: '/admin/job_circulars',
         icon: PickaxeIcon,
@@ -120,6 +125,26 @@ const mainNavItems: NavItem[] = [
         title: 'Job Applications',
         href: '/admin/job_applications',
         icon: ViewIcon,
+    },
+    {
+        title: 'Our Locations',
+        href: '/admin/locations',
+        icon: CalendarClockIcon,
+    },
+    {
+        title: 'Events',
+        href: '/admin/events',
+        icon: CalendarClockIcon,
+    },
+    {
+        title: 'Partners',
+        href: '/admin/partners',
+        icon: HandshakeIcon,
+    },
+    {
+        title: 'Awards',
+        href: '/admin/awards',
+        icon: TrophyIcon,
     },
     {
         title: 'Testimonials',

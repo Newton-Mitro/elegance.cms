@@ -56,16 +56,17 @@ export default function Dashboard() {
                     {[
                         { label: 'Users', value: stats.users, icon: 'fa-user-graduate', color: 'text-green-500' },
                         { label: 'Pages', value: stats.pages, icon: 'fa-solid fa-file-lines', color: 'text-blue-500' },
+                        { label: 'Teams', value: stats.teams, icon: 'fa-calendar-days', color: 'text-red-500' },
+                        { label: 'Our Locations', value: stats.officeLocations, icon: 'fa-solid fa-map-location-dot', color: 'text-pink-500' },
+                        { label: 'Projects', value: stats.projects, icon: 'fa-user-graduate', color: 'text-green-500' },
+                        { label: 'Services', value: stats.services, icon: 'fa-solid fa-truck-fast', color: 'text-orange-500' },
+                        { label: 'Appointments', value: stats.appointments, icon: 'fa-solid fa-truck-fast', color: 'text-orange-500' },
+
+                        { label: 'Job Circulars', value: stats.jobCirculars, icon: 'fa-calendar-days', color: 'text-red-500' },
                         { label: 'Products', value: stats.products, icon: 'fa-box-open', color: 'text-purple-500' },
                         { label: 'Orders', value: stats.orders, icon: 'fa-box-open', color: 'text-purple-500' },
                         { label: 'Payments', value: stats.payments, icon: 'fa-box-open', color: 'text-purple-500' },
-                        { label: 'Services', value: stats.services, icon: 'fa-solid fa-truck-fast', color: 'text-orange-500' },
-                        { label: 'Appointments', value: stats.appointments, icon: 'fa-solid fa-truck-fast', color: 'text-orange-500' },
-                        { label: 'Our Locations', value: stats.officeLocations, icon: 'fa-solid fa-map-location-dot', color: 'text-pink-500' },
-                        { label: 'Teams', value: stats.teams, icon: 'fa-calendar-days', color: 'text-red-500' },
-                        { label: 'Job Circulars', value: stats.jobCirculars, icon: 'fa-calendar-days', color: 'text-red-500' },
                         { label: 'Students', value: stats.students, icon: 'fa-user-graduate', color: 'text-green-500' },
-                        { label: 'Projects', value: stats.projects, icon: 'fa-user-graduate', color: 'text-green-500' },
                     ].map((stat, idx) => (
                         <div
                             key={idx}
