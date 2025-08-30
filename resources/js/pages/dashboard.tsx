@@ -85,17 +85,63 @@ export default function Dashboard() {
                 </div>
 
                 {/* 🔹 Graphs */}
-                <div className="grid gap-4 md:grid-cols-10">
+                <div className="grid gap-4 md:grid-cols-12">
                     {/* Left chart: 40% → span 4 of 10 */}
-                    <div className="col-span-10 rounded-xl border border-sidebar-border/70 bg-white p-4 shadow-sm md:col-span-3 dark:border-sidebar-border dark:bg-neutral-900">
+                    <div className="col-span-10 rounded-xl border border-sidebar-border/70 bg-white p-4 shadow-sm md:col-span-4 dark:border-sidebar-border dark:bg-neutral-900">
                         <h2 className="mb-3 text-lg font-semibold">Monthly Visitors</h2>
                         <Line data={monthlyVisitorsData} />
                     </div>
 
                     {/* Right chart: 60% → span 6 of 10 */}
-                    <div className="col-span-10 rounded-xl border border-sidebar-border/70 bg-white p-4 shadow-sm md:col-span-7 dark:border-sidebar-border dark:bg-neutral-900">
+                    <div className="col-span-10 rounded-xl border border-sidebar-border/70 bg-white p-4 shadow-sm md:col-span-4 dark:border-sidebar-border dark:bg-neutral-900">
                         <h2 className="mb-3 text-lg font-semibold">Top Visited Pages</h2>
                         <Bar data={routeVisitedData} />
+                    </div>
+
+                    {/* Right chart: 60% → span 6 of 10 */}
+                    <div className="col-span-10 rounded-xl border border-sidebar-border/70 bg-white p-4 shadow-sm md:col-span-4 dark:border-sidebar-border dark:bg-neutral-900">
+                        <h2 className="mb-3 text-lg font-semibold">Today's Top Visited Pages</h2>
+                        <Bar data={routeVisitedData} />
+                    </div>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-12">
+                    {/* Left chart: 40% → span 4 of 10 */}
+                    <div className="col-span-10 rounded-xl border border-sidebar-border/70 bg-white p-4 shadow-sm md:col-span-4 dark:border-sidebar-border dark:bg-neutral-900">
+                        <h2 className="mb-3 text-lg font-semibold">Monthly Orders</h2>
+                        <Line data={monthlyVisitorsData} />
+                    </div>
+
+                    {/* Left chart: 40% → span 4 of 10 */}
+                    <div className="col-span-10 rounded-xl border border-sidebar-border/70 bg-white p-4 shadow-sm md:col-span-4 dark:border-sidebar-border dark:bg-neutral-900">
+                        <h2 className="mb-3 text-lg font-semibold">Monthly Appointments</h2>
+                        <Line data={monthlyVisitorsData} />
+                    </div>
+
+                    {/* Left chart: 40% → span 4 of 10 */}
+                    <div className="col-span-10 rounded-xl border border-sidebar-border/70 bg-white p-4 shadow-sm md:col-span-4 dark:border-sidebar-border dark:bg-neutral-900">
+                        <h2 className="mb-3 text-lg font-semibold">Monthly Inventory Logs</h2>
+                        <Line data={monthlyVisitorsData} />
+                    </div>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-12">
+                    {/* Left chart: 40% → span 4 of 10 */}
+                    <div className="col-span-10 rounded-xl border border-sidebar-border/70 bg-white p-4 shadow-sm md:col-span-4 dark:border-sidebar-border dark:bg-neutral-900">
+                        <h2 className="mb-3 text-lg font-semibold">Sales</h2>
+                        <Line data={monthlyVisitorsData} />
+                    </div>
+
+                    {/* Left chart: 40% → span 4 of 10 */}
+                    <div className="col-span-10 rounded-xl border border-sidebar-border/70 bg-white p-4 shadow-sm md:col-span-4 dark:border-sidebar-border dark:bg-neutral-900">
+                        <h2 className="mb-3 text-lg font-semibold">Cupon Log</h2>
+                        <Line data={monthlyVisitorsData} />
+                    </div>
+
+                    {/* Left chart: 40% → span 4 of 10 */}
+                    <div className="col-span-10 rounded-xl border border-sidebar-border/70 bg-white p-4 shadow-sm md:col-span-4 dark:border-sidebar-border dark:bg-neutral-900">
+                        <h2 className="mb-3 text-lg font-semibold">Monthly Inventory Logs</h2>
+                        <Line data={monthlyVisitorsData} />
                     </div>
                 </div>
 
